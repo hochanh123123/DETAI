@@ -42,14 +42,23 @@
             this.btnTaoTK = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.cmbNhom = new System.Windows.Forms.ComboBox();
-            this.bdsGV = new System.Windows.Forms.BindingSource(this.components);
-            this.dSGVTableAdapter = new CSDLPT.DSTableAdapters.DSGVTableAdapter();
             this.cmbTenGV = new System.Windows.Forms.ComboBox();
+            this.vDSGVChuaCoTaiKhoanBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.v_DSGVChuaCoTaiKhoanTableAdapter = new CSDLPT.DSTableAdapters.V_DSGVChuaCoTaiKhoanTableAdapter();
             mAGVLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gIAOVIENBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdsGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vDSGVChuaCoTaiKhoanBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // mAGVLabel
+            // 
+            mAGVLabel.AutoSize = true;
+            mAGVLabel.Location = new System.Drawing.Point(525, 302);
+            mAGVLabel.Name = "mAGVLabel";
+            mAGVLabel.Size = new System.Drawing.Size(81, 24);
+            mAGVLabel.TabIndex = 15;
+            mAGVLabel.Text = "Tên GV:";
             // 
             // label1
             // 
@@ -122,15 +131,6 @@
             this.tableAdapterManager.SINHVIENTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = CSDLPT.DSTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // mAGVLabel
-            // 
-            mAGVLabel.AutoSize = true;
-            mAGVLabel.Location = new System.Drawing.Point(525, 302);
-            mAGVLabel.Name = "mAGVLabel";
-            mAGVLabel.Size = new System.Drawing.Size(81, 24);
-            mAGVLabel.TabIndex = 15;
-            mAGVLabel.Text = "Tên GV:";
-            // 
             // btnTaoTK
             // 
             this.btnTaoTK.Location = new System.Drawing.Point(559, 396);
@@ -160,18 +160,9 @@
             this.cmbNhom.Size = new System.Drawing.Size(376, 30);
             this.cmbNhom.TabIndex = 19;
             // 
-            // bdsGV
-            // 
-            this.bdsGV.DataMember = "DSGV";
-            this.bdsGV.DataSource = this.dS;
-            // 
-            // dSGVTableAdapter
-            // 
-            this.dSGVTableAdapter.ClearBeforeFill = true;
-            // 
             // cmbTenGV
             // 
-            this.cmbTenGV.DataSource = this.bdsGV;
+            this.cmbTenGV.DataSource = this.vDSGVChuaCoTaiKhoanBindingSource;
             this.cmbTenGV.DisplayMember = "HOTEN";
             this.cmbTenGV.FormattingEnabled = true;
             this.cmbTenGV.Location = new System.Drawing.Point(646, 299);
@@ -179,6 +170,15 @@
             this.cmbTenGV.Size = new System.Drawing.Size(376, 30);
             this.cmbTenGV.TabIndex = 20;
             this.cmbTenGV.ValueMember = "MAGV";
+            // 
+            // vDSGVChuaCoTaiKhoanBindingSource
+            // 
+            this.vDSGVChuaCoTaiKhoanBindingSource.DataMember = "V_DSGVChuaCoTaiKhoan";
+            this.vDSGVChuaCoTaiKhoanBindingSource.DataSource = this.dS;
+            // 
+            // v_DSGVChuaCoTaiKhoanTableAdapter
+            // 
+            this.v_DSGVChuaCoTaiKhoanTableAdapter.ClearBeforeFill = true;
             // 
             // frmTaoTaiKhoan
             // 
@@ -196,14 +196,14 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTaoTaiKhoan";
             this.Text = "Tạo Tài Khoản";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmTaoTaiKhoan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gIAOVIENBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdsGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vDSGVChuaCoTaiKhoanBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,8 +222,8 @@
         private System.Windows.Forms.Button btnTaoTK;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.ComboBox cmbNhom;
-        private System.Windows.Forms.BindingSource bdsGV;
-        private DSTableAdapters.DSGVTableAdapter dSGVTableAdapter;
         private System.Windows.Forms.ComboBox cmbTenGV;
+        private System.Windows.Forms.BindingSource vDSGVChuaCoTaiKhoanBindingSource;
+        private DSTableAdapters.V_DSGVChuaCoTaiKhoanTableAdapter v_DSGVChuaCoTaiKhoanTableAdapter;
     }
 }

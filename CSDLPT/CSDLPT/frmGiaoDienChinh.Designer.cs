@@ -50,8 +50,6 @@
             this.btnDe = new DevExpress.XtraBars.BarButtonItem();
             this.btnThiThu = new DevExpress.XtraBars.BarButtonItem();
             this.btnXemKetQua = new DevExpress.XtraBars.BarButtonItem();
-            this.btnXemDiem = new DevExpress.XtraBars.BarButtonItem();
-            this.btnXemDSDangKy = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem22 = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem23 = new DevExpress.XtraBars.BarButtonItem();
@@ -67,9 +65,9 @@
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.btnGVDK = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnXemDiem = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem14 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnXemDSDangKy = new DevExpress.XtraBars.BarButtonItem();
             this.btnTaoTK = new DevExpress.XtraBars.BarButtonItem();
             this.btnDangXuat = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -120,8 +118,6 @@
             this.btnDe,
             this.btnThiThu,
             this.btnXemKetQua,
-            this.btnXemDiem,
-            this.btnXemDSDangKy,
             this.barButtonItem22,
             this.barSubItem1,
             this.barButtonItem23,
@@ -134,9 +130,9 @@
             this.barEditItem3,
             this.barStaticItem1,
             this.btnGVDK,
-            this.barButtonItem1,
+            this.btnXemDiem,
             this.barButtonItem13,
-            this.barButtonItem14,
+            this.btnXemDSDangKy,
             this.btnTaoTK,
             this.btnDangXuat});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
@@ -310,26 +306,6 @@
             this.btnXemKetQua.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXemKetQua.ImageOptions.LargeImage")));
             this.btnXemKetQua.Name = "btnXemKetQua";
             // 
-            // btnXemDiem
-            // 
-            this.btnXemDiem.Caption = "Xem điểm";
-            this.btnXemDiem.Id = 25;
-            this.btnXemDiem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXemDiem.ImageOptions.Image")));
-            this.btnXemDiem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXemDiem.ImageOptions.LargeImage")));
-            this.btnXemDiem.ItemAppearance.Disabled.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXemDiem.ItemAppearance.Disabled.Options.UseFont = true;
-            this.btnXemDiem.Name = "btnXemDiem";
-            // 
-            // btnXemDSDangKy
-            // 
-            this.btnXemDSDangKy.Caption = "Xem DS đăng ký";
-            this.btnXemDSDangKy.Id = 26;
-            this.btnXemDSDangKy.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXemDSDangKy.ImageOptions.Image")));
-            this.btnXemDSDangKy.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXemDSDangKy.ImageOptions.LargeImage")));
-            this.btnXemDSDangKy.ItemAppearance.Disabled.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXemDSDangKy.ItemAppearance.Disabled.Options.UseFont = true;
-            this.btnXemDSDangKy.Name = "btnXemDSDangKy";
-            // 
             // barButtonItem22
             // 
             this.barButtonItem22.Caption = "barButtonItem22";
@@ -425,13 +401,13 @@
             this.btnGVDK.Name = "btnGVDK";
             this.btnGVDK.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGVDK_ItemClick);
             // 
-            // barButtonItem1
+            // btnXemDiem
             // 
-            this.barButtonItem1.Caption = "Xem điểm";
-            this.barButtonItem1.Id = 39;
-            this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
-            this.barButtonItem1.Name = "barButtonItem1";
+            this.btnXemDiem.Caption = "Xem điểm";
+            this.btnXemDiem.Id = 39;
+            this.btnXemDiem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
+            this.btnXemDiem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.btnXemDiem.Name = "btnXemDiem";
             // 
             // barButtonItem13
             // 
@@ -441,22 +417,23 @@
             this.barButtonItem13.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem13.ImageOptions.LargeImage")));
             this.barButtonItem13.Name = "barButtonItem13";
             // 
-            // barButtonItem14
+            // btnXemDSDangKy
             // 
-            this.barButtonItem14.Caption = "Xem DS đăng ký";
-            this.barButtonItem14.Id = 41;
-            this.barButtonItem14.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem14.ImageOptions.Image")));
-            this.barButtonItem14.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem14.ImageOptions.LargeImage")));
-            this.barButtonItem14.ItemAppearance.Disabled.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barButtonItem14.ItemAppearance.Disabled.Options.UseFont = true;
-            this.barButtonItem14.Name = "barButtonItem14";
+            this.btnXemDSDangKy.Caption = "Xem DS đăng ký";
+            this.btnXemDSDangKy.Id = 41;
+            this.btnXemDSDangKy.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem14.ImageOptions.Image")));
+            this.btnXemDSDangKy.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem14.ImageOptions.LargeImage")));
+            this.btnXemDSDangKy.ItemAppearance.Disabled.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXemDSDangKy.ItemAppearance.Disabled.Options.UseFont = true;
+            this.btnXemDSDangKy.Name = "btnXemDSDangKy";
+            this.btnXemDSDangKy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnXemDSDangKy_ItemClick);
             // 
             // btnTaoTK
             // 
             this.btnTaoTK.Caption = "Tạo tài khoản";
             this.btnTaoTK.Id = 42;
-            this.btnTaoTK.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem15.ImageOptions.Image")));
-            this.btnTaoTK.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem15.ImageOptions.LargeImage")));
+            this.btnTaoTK.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnTaoTK.ImageOptions.Image")));
+            this.btnTaoTK.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnTaoTK.ImageOptions.LargeImage")));
             this.btnTaoTK.Name = "btnTaoTK";
             this.btnTaoTK.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTaoTK_ItemClick);
             // 
@@ -464,9 +441,10 @@
             // 
             this.btnDangXuat.Caption = "Đăng xuất";
             this.btnDangXuat.Id = 43;
-            this.btnDangXuat.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem16.ImageOptions.Image")));
-            this.btnDangXuat.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem16.ImageOptions.LargeImage")));
+            this.btnDangXuat.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDangXuat.ImageOptions.Image")));
+            this.btnDangXuat.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnDangXuat.ImageOptions.LargeImage")));
             this.btnDangXuat.Name = "btnDangXuat";
+            this.btnDangXuat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDangXuat_ItemClick);
             // 
             // ribbonPage2
             // 
@@ -521,12 +499,12 @@
             // 
             // ribbonPageGroup8
             // 
-            this.ribbonPageGroup8.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup8.ItemLinks.Add(this.btnXemDiem);
             this.ribbonPageGroup8.Name = "ribbonPageGroup8";
             // 
             // ribbonPageGroup5
             // 
-            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem14);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnXemDSDangKy);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             // 
             // ribbonPageGroup3
@@ -621,8 +599,6 @@
         private DevExpress.XtraBars.BarButtonItem btnDe;
         private DevExpress.XtraBars.BarButtonItem btnThiThu;
         private DevExpress.XtraBars.BarButtonItem btnXemKetQua;
-        private DevExpress.XtraBars.BarButtonItem btnXemDiem;
-        private DevExpress.XtraBars.BarButtonItem btnXemDSDangKy;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
@@ -649,9 +625,9 @@
         private System.Windows.Forms.ToolStripStatusLabel tsstHoTen;
         private System.Windows.Forms.ToolStripStatusLabel tsstNhom;
         private DevExpress.XtraBars.BarButtonItem btnGVDK;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem btnXemDiem;
         private DevExpress.XtraBars.BarButtonItem barButtonItem13;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem14;
+        private DevExpress.XtraBars.BarButtonItem btnXemDSDangKy;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.BarButtonItem btnTaoTK;
         private DevExpress.XtraBars.BarButtonItem btnDangXuat;

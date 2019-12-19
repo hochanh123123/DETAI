@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.vDSPHANMANHBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rdbSinhVien = new System.Windows.Forms.RadioButton();
             this.rdbGiangVien = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,9 +37,13 @@
             this.btnDangNhap = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.cmbCoSo = new System.Windows.Forms.ComboBox();
+            this.dS = new CSDLPT.DS();
             this.txtTaiKhoan = new System.Windows.Forms.TextBox();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.vDSPHANMANHBindingSource)).BeginInit();
+            this.v_DSPMTableAdapter = new CSDLPT.DSTableAdapters.V_DSPMTableAdapter();
+            this.vDSPMBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.dS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vDSPMBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // rdbSinhVien
@@ -76,7 +79,6 @@
             this.label1.Size = new System.Drawing.Size(55, 23);
             this.label1.TabIndex = 2;
             this.label1.Text = "Cơ sở";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -122,8 +124,8 @@
             // 
             // cmbCoSo
             // 
-            this.cmbCoSo.DataSource = this.vDSPHANMANHBindingSource;
-            this.cmbCoSo.DisplayMember = "TENCN";
+            this.cmbCoSo.DataSource = this.vDSPMBindingSource;
+            this.cmbCoSo.DisplayMember = "TENCS";
             this.cmbCoSo.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCoSo.FormattingEnabled = true;
             this.cmbCoSo.Location = new System.Drawing.Point(277, 102);
@@ -132,6 +134,11 @@
             this.cmbCoSo.TabIndex = 8;
             this.cmbCoSo.ValueMember = "TENSERVER";
             this.cmbCoSo.SelectedIndexChanged += new System.EventHandler(this.cmbCoSo_SelectedIndexChanged);
+            // 
+            // dS
+            // 
+            this.dS.DataSetName = "DS";
+            this.dS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // txtTaiKhoan
             // 
@@ -149,6 +156,15 @@
             this.txtMatKhau.Size = new System.Drawing.Size(502, 29);
             this.txtMatKhau.TabIndex = 10;
             this.txtMatKhau.UseSystemPasswordChar = true;
+            // 
+            // v_DSPMTableAdapter
+            // 
+            this.v_DSPMTableAdapter.ClearBeforeFill = true;
+            // 
+            // vDSPMBindingSource
+            // 
+            this.vDSPMBindingSource.DataMember = "V_DSPM";
+            this.vDSPMBindingSource.DataSource = this.dS;
             // 
             // frmDangNhap
             // 
@@ -173,14 +189,14 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng Nhập";
             this.Load += new System.EventHandler(this.frmDangNhap_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.vDSPHANMANHBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vDSPMBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.BindingSource vDSPHANMANHBindingSource;
         private System.Windows.Forms.RadioButton rdbSinhVien;
         private System.Windows.Forms.RadioButton rdbGiangVien;
         private System.Windows.Forms.Label label1;
@@ -191,6 +207,9 @@
         private System.Windows.Forms.ComboBox cmbCoSo;
         private System.Windows.Forms.TextBox txtTaiKhoan;
         private System.Windows.Forms.TextBox txtMatKhau;
+        private DS dS;
+        private DSTableAdapters.V_DSPMTableAdapter v_DSPMTableAdapter;
+        private System.Windows.Forms.BindingSource vDSPMBindingSource;
     }
 }
 

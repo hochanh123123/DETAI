@@ -248,6 +248,7 @@
             this.cmbCoSo.Size = new System.Drawing.Size(333, 28);
             this.cmbCoSo.TabIndex = 39;
             this.cmbCoSo.ValueMember = "TENSERVER";
+            this.cmbCoSo.SelectedIndexChanged += new System.EventHandler(this.cmbCoSo_SelectedIndexChanged);
             this.cmbCoSo.SelectedValueChanged += new System.EventHandler(this.cmbCoSo_SelectedValueChanged);
             // 
             // bar4

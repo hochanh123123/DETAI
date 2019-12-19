@@ -35,8 +35,10 @@ namespace CSDLPT
             this.mONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
             this.mONHOCTableAdapter.Fill(this.dS.MONHOC);  //lenh tai ve
             // TODO: This line of code loads data into the 'dS.BODE' table. You can move, or remove it, as needed.
+            this.bODETableAdapter.Connection.ConnectionString = Program.connstr;
             this.bODETableAdapter.Fill(this.dS.BODE);
             // TODO: This line of code loads data into the 'dS.GIAOVIEN_DANGKY' table. You can move, or remove it, as needed.
+            this.gIAOVIEN_DANGKYTableAdapter.Connection.ConnectionString = Program.connstr;
             this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
 
             //DataTable dt = new DataTable();
@@ -112,8 +114,6 @@ namespace CSDLPT
 
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            String strLenh;
-
             if (status.Equals("Them"))
             {
                 if (txtMaMH.Text.Trim() == "")
@@ -256,6 +256,11 @@ namespace CSDLPT
 
         private void cmbCoSo_SelectedValueChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void cmbCoSo_SelectedIndexChanged(object sender, EventArgs e)
+        {
             try
             {
                 if (cmbCoSo.SelectedValue.ToString() == "System.Data.DataRowView") return;
@@ -273,6 +278,9 @@ namespace CSDLPT
                 Program.password = Program.mloginDN;
             }
 
+            MessageBox.Show("dd " + Program.mlogin + " " + Program.password, "", MessageBoxButtons.OK);
+
+
             if (Program.KetNoi() == 0)
             {
                 MessageBox.Show("Lỗi kết nối về cơ sở mới", "", MessageBoxButtons.OK);
@@ -283,6 +291,10 @@ namespace CSDLPT
                 {
                     this.mONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.mONHOCTableAdapter.Fill(this.dS.MONHOC);
+                    this.bODETableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.bODETableAdapter.Fill(this.dS.BODE);
+                    this.gIAOVIEN_DANGKYTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
                 }
                 catch (Exception ex) { }
             }

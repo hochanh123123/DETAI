@@ -28,6 +28,8 @@ namespace CSDLPT
 
         private void frmSinhVien_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dS.V_DSPM' table. You can move, or remove it, as needed.
+            this.v_DSPMTableAdapter.Fill(this.dS.V_DSPM);
 
             dS.EnforceConstraints = false; //khong kt khao ngoai
             // TODO: This line of code loads data into the 'dS.DSKHOA' table. You can move, or remove it, as needed.
@@ -237,39 +239,6 @@ namespace CSDLPT
             if (MessageBox.Show("Bạn có chắc chắn muốn thoát Form Sinh viên không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.Yes)
             {
                 this.Close();
-            }
-        }
-
-        private void cmbCoSo_SelectedValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (cmbCoSo.SelectedValue.ToString() == "System.Data.DataRowView") return;
-                Program.servername = cmbCoSo.SelectedValue.ToString();
-            }
-            catch (Exception) { };
-            if (cmbCoSo.SelectedIndex != Program.mCoso)
-            {
-                Program.mlogin = Program.remotelogin;
-                Program.password = Program.remotepassword;
-            }
-            else
-            {
-                Program.mlogin = Program.mloginDN;
-                Program.password = Program.mloginDN;
-            }
-            if (Program.KetNoi() == 0)
-            {
-                MessageBox.Show("Lỗi kết nối về cơ sở mới", "", MessageBoxButtons.OK);
-            }
-            else
-            {
-                try
-                {
-                    //this.mONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
-                    //this.mONHOCTableAdapter.Fill(this.dS.MONHOC);
-                }
-                catch (Exception ex) { }
             }
         }
         
@@ -517,6 +486,45 @@ namespace CSDLPT
             btnXoaSV.Enabled = true;
             btnRefreshSV.Enabled = true;
             btnPhucHoiSV.Enabled = true;
+        }
+
+        private void cmbCoSo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbCoSo.SelectedValue.ToString() == "System.Data.DataRowView") return;
+                Program.servername = cmbCoSo.SelectedValue.ToString();
+            }
+            catch (Exception) { };
+            if (cmbCoSo.SelectedIndex != Program.mCoso)
+            {
+                Program.mlogin = Program.remotelogin;
+                Program.password = Program.remotepassword;
+            }
+            else
+            {
+                Program.mlogin = Program.mloginDN;
+                Program.password = Program.mloginDN;
+            }
+            if (Program.KetNoi() == 0)
+            {
+                MessageBox.Show("Lỗi kết nối về cơ sở mới", "", MessageBoxButtons.OK);
+            }
+            else
+            {
+                try
+                {
+                    this.dSKHOATableAdapter.Connection.ConnectionString = Program.connstr; //chay tren tai khaon moi nhat khi dang nhap
+                    this.dSKHOATableAdapter.Fill(this.dS.DSKHOA);
+
+                    this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.lOPTableAdapter.Fill(this.dS.LOP);
+
+                    this.sINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.sINHVIENTableAdapter.Fill(this.dS.SINHVIEN);
+                }
+                catch (Exception ex) { }
+            }
         }
 
         private void btnThoatSV_Click(object sender, EventArgs e)

@@ -41,6 +41,11 @@ namespace CSDLPT
         {
             tsstHoTen.Text = "Họ tên: " + Program.mHoten;
             tsstNhom.Text = "Nhóm: " + Program.mGroup;
+
+            if(Program.mGroup == "Giangvien")
+            {
+                btnTaoTK.Enabled = false;
+            }
         }
 
         private void btnSinhVien_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -101,6 +106,25 @@ namespace CSDLPT
             else
             {
                 frmTaoTaiKhoan f = new frmTaoTaiKhoan();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void btnDangXuat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+             Program.mlogin = "";
+             Program.password = "";
+             this.Close();
+        }
+
+        private void btnXemDSDangKy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frmXemDSDangKy));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmXemDSDangKy f = new frmXemDSDangKy();
                 f.MdiParent = this;
                 f.Show();
             }

@@ -65,7 +65,6 @@ namespace CSDLPT
             try
             {
                 myreader = sqlcmd.ExecuteReader(); return myreader;
-
             }
             catch (SqlException ex)
             {

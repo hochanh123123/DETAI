@@ -18,6 +18,10 @@ namespace CSDLPT
 
         private void frmDangNhap_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dS.V_DSPM' table. You can move, or remove it, as needed.
+            this.v_DSPMTableAdapter.Fill(this.dS.V_DSPM);
+            // TODO: This line of code loads data into the 'dS.V_DSPM' table. You can move, or remove it, as needed.
+            this.v_DSPMTableAdapter.Fill(this.dS.V_DSPM);
             // TODO: This line of code loads data into the 'tRACNGHIEMDataSet.V_DS_PHANMANH' table. You can move, or remove it, as needed.
             string chuoiKetNoi = "Data Source=SUONG;Initial Catalog=" + Program.database + ";Integrated Security=True"; //Ket noi ve site chu k can password, k can tai khoan
             Program.conn.ConnectionString = chuoiKetNoi;
@@ -33,9 +37,7 @@ namespace CSDLPT
             cmbCoSo.DisplayMember = "TENCS"; //ten cot muon hien len
             cmbCoSo.ValueMember = "TENSERVER"; //gia tri muon hien len
 
-            //this.v_DS_PHANMANHTableAdapter.Fill(this.tRACNGHIEMDataSet.V_DS_PHANMANH);
             cmbCoSo.SelectedIndex = 0;
-
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
@@ -123,11 +125,6 @@ namespace CSDLPT
                 Program.servername = cmbCoSo.SelectedValue.ToString();
             }
             catch(Exception) { };
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
