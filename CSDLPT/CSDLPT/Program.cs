@@ -24,7 +24,7 @@ namespace CSDLPT
         public static String password = ""; //password hiện hành
 
         public static String database = "TRACNGHIEM";
-        public static String remotelogin = "sa"; //hỗ trợ kết nối ra ngoài, giống nhau trên tất cả phân mảnh
+        public static String remotelogin = "HTKN"; //hỗ trợ kết nối ra ngoài, giống nhau trên tất cả phân mảnh
         public static String remotepassword = "123456";
         public static String mloginDN = ""; 
         public static String passwordDN = "";

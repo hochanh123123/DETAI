@@ -280,6 +280,7 @@
             this.btnGiaoVien.ItemAppearance.Disabled.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGiaoVien.ItemAppearance.Disabled.Options.UseFont = true;
             this.btnGiaoVien.Name = "btnGiaoVien";
+            this.btnGiaoVien.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGiaoVien_ItemClick);
             // 
             // btnDe
             // 
@@ -405,8 +406,8 @@
             // 
             this.btnXemDiem.Caption = "Xem điểm";
             this.btnXemDiem.Id = 39;
-            this.btnXemDiem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.btnXemDiem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.btnXemDiem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXemDiem.ImageOptions.Image")));
+            this.btnXemDiem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXemDiem.ImageOptions.LargeImage")));
             this.btnXemDiem.Name = "btnXemDiem";
             // 
             // barButtonItem13
@@ -421,8 +422,8 @@
             // 
             this.btnXemDSDangKy.Caption = "Xem DS đăng ký";
             this.btnXemDSDangKy.Id = 41;
-            this.btnXemDSDangKy.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem14.ImageOptions.Image")));
-            this.btnXemDSDangKy.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem14.ImageOptions.LargeImage")));
+            this.btnXemDSDangKy.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXemDSDangKy.ImageOptions.Image")));
+            this.btnXemDSDangKy.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXemDSDangKy.ImageOptions.LargeImage")));
             this.btnXemDSDangKy.ItemAppearance.Disabled.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXemDSDangKy.ItemAppearance.Disabled.Options.UseFont = true;
             this.btnXemDSDangKy.Name = "btnXemDSDangKy";
@@ -560,7 +561,7 @@
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IsMdiContainer = true;
             this.Name = "frmGiaoDienChinh";
-            this.Text = "Giao Diện Nhóm Trường";
+            this.Text = "Giao Diện Chính";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmGiaoDienNhomTruong_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();

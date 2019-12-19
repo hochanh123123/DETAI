@@ -74,8 +74,6 @@ namespace CSDLPT
             }
         }
 
-        
-
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsMonHoc.Position;
@@ -254,11 +252,6 @@ namespace CSDLPT
             }
         }
 
-        private void cmbCoSo_SelectedValueChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void cmbCoSo_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -275,11 +268,8 @@ namespace CSDLPT
             else
             {
                 Program.mlogin = Program.mloginDN;
-                Program.password = Program.mloginDN;
+                Program.password = Program.passwordDN;
             }
-
-            MessageBox.Show("dd " + Program.mlogin + " " + Program.password, "", MessageBoxButtons.OK);
-
 
             if (Program.KetNoi() == 0)
             {

@@ -90,7 +90,7 @@
             // tENMHLabel
             // 
             tENMHLabel.AutoSize = true;
-            tENMHLabel.Location = new System.Drawing.Point(619, 41);
+            tENMHLabel.Location = new System.Drawing.Point(629, 51);
             tENMHLabel.Name = "tENMHLabel";
             tENMHLabel.Size = new System.Drawing.Size(57, 17);
             tENMHLabel.TabIndex = 2;
@@ -99,7 +99,7 @@
             // mAMHLabel
             // 
             mAMHLabel.AutoSize = true;
-            mAMHLabel.Location = new System.Drawing.Point(150, 41);
+            mAMHLabel.Location = new System.Drawing.Point(160, 51);
             mAMHLabel.Name = "mAMHLabel";
             mAMHLabel.Size = new System.Drawing.Size(50, 17);
             mAMHLabel.TabIndex = 0;
@@ -169,7 +169,7 @@
             // txtTenMH
             // 
             this.txtTenMH.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsMonHoc, "TENMH", true));
-            this.txtTenMH.Location = new System.Drawing.Point(682, 38);
+            this.txtTenMH.Location = new System.Drawing.Point(692, 48);
             this.txtTenMH.Name = "txtTenMH";
             this.txtTenMH.Size = new System.Drawing.Size(270, 22);
             this.txtTenMH.TabIndex = 3;
@@ -177,7 +177,7 @@
             // txtMaMH
             // 
             this.txtMaMH.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bdsMonHoc, "MAMH", true));
-            this.txtMaMH.Location = new System.Drawing.Point(213, 38);
+            this.txtMaMH.Location = new System.Drawing.Point(223, 48);
             this.txtMaMH.Name = "txtMaMH";
             this.txtMaMH.Size = new System.Drawing.Size(270, 22);
             this.txtMaMH.TabIndex = 1;
@@ -249,7 +249,6 @@
             this.cmbCoSo.TabIndex = 39;
             this.cmbCoSo.ValueMember = "TENSERVER";
             this.cmbCoSo.SelectedIndexChanged += new System.EventHandler(this.cmbCoSo_SelectedIndexChanged);
-            this.cmbCoSo.SelectedValueChanged += new System.EventHandler(this.cmbCoSo_SelectedValueChanged);
             // 
             // bar4
             // 

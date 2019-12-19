@@ -37,7 +37,9 @@ namespace CSDLPT
             cmbCoSo.DisplayMember = "TENCS"; //ten cot muon hien len
             cmbCoSo.ValueMember = "TENSERVER"; //gia tri muon hien len
 
+            //cmbCoSo.SelectedIndex = 1;
             cmbCoSo.SelectedIndex = 0;
+            //cmbCoSo.SelectedIndex = -1;
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)

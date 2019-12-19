@@ -718,6 +718,7 @@
             this.cmbCoSo.Size = new System.Drawing.Size(333, 24);
             this.cmbCoSo.TabIndex = 43;
             this.cmbCoSo.ValueMember = "TENSERVER";
+            this.cmbCoSo.SelectedIndexChanged += new System.EventHandler(this.cmbCoSo_SelectedIndexChanged);
             // 
             // vDSPMBindingSource
             // 
@@ -731,9 +732,6 @@
             this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 42;
             this.label1.Text = "CƠ SỞ:";
-            // 
-            // v_DSPMTableAdapter
-            // 
             // 
             // dSMHTableAdapter
             // 

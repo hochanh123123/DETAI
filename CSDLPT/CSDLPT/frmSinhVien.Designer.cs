@@ -57,6 +57,7 @@
             this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
             this.barDockControl4 = new DevExpress.XtraBars.BarDockControl();
             this.cmbCoSo = new System.Windows.Forms.ComboBox();
+            this.vDSPMBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.bdsLop = new System.Windows.Forms.BindingSource(this.components);
             this.lOPTableAdapter = new CSDLPT.DSTableAdapters.LOPTableAdapter();
@@ -99,7 +100,6 @@
             this.btnPhucHoiSV = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRefreshSV = new System.Windows.Forms.ToolStripMenuItem();
             this.btnThoatSV = new System.Windows.Forms.ToolStripMenuItem();
-            this.vDSPMBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.v_DSPMTableAdapter = new CSDLPT.DSTableAdapters.V_DSPMTableAdapter();
             tENLOPLabel = new System.Windows.Forms.Label();
             mALOPLabel = new System.Windows.Forms.Label();
@@ -113,6 +113,7 @@
             mALOPLabel1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vDSPMBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsLop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcLop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -138,7 +139,6 @@
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sINHVIENDataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.vDSPMBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tENLOPLabel
@@ -293,7 +293,7 @@
             this.btnThem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnThem.ImageOptions.Image")));
             this.btnThem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnThem.ImageOptions.LargeImage")));
             this.btnThem.Name = "btnThem";
-            this.btnThem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThem_ItemClick_1);
+            this.btnThem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThem_ItemClick);
             // 
             // btnSua
             // 
@@ -407,6 +407,11 @@
             this.cmbCoSo.ValueMember = "TENSERVER";
             this.cmbCoSo.SelectedIndexChanged += new System.EventHandler(this.cmbCoSo_SelectedIndexChanged);
             // 
+            // vDSPMBindingSource
+            // 
+            this.vDSPMBindingSource.DataMember = "V_DSPM";
+            this.vDSPMBindingSource.DataSource = this.dS;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -415,6 +420,7 @@
             this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 40;
             this.label1.Text = "CƠ SỞ:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // bdsLop
             // 
@@ -780,11 +786,6 @@
             this.btnThoatSV.Text = "Thoát";
             this.btnThoatSV.Click += new System.EventHandler(this.btnThoatSV_Click);
             // 
-            // vDSPMBindingSource
-            // 
-            this.vDSPMBindingSource.DataMember = "V_DSPM";
-            this.vDSPMBindingSource.DataSource = this.dS;
-            // 
             // v_DSPMTableAdapter
             // 
             this.v_DSPMTableAdapter.ClearBeforeFill = true;
@@ -810,6 +811,7 @@
             this.Load += new System.EventHandler(this.frmSinhVien_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vDSPMBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsLop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcLop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
@@ -837,7 +839,6 @@
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sINHVIENDataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.vDSPMBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

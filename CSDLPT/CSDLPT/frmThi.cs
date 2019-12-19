@@ -301,7 +301,29 @@ namespace CSDLPT
 
         private void ThemVaoChiTietBaiThi()
         {
+            for (int i = 0; i < Int32.Parse(txtSoCauThi.Text); i++)
+            {
+                string strLenh = "SELECT MABD FROM BANGDIEM WHERE MASV = '" + maSV + "' AND MAMH = '" + cmbTenMH.SelectedValue.ToString() + "' AND LAN = " + cmbLan.SelectedItem.ToString() ;
+                Program.myReader = Program.ExecSqlDataReader(strLenh);
+                Program.myReader.Read();
+                int maBD = Int32.Parse(Program.myReader.GetString(0).ToString());
+                Program.myReader.Close();
+                
+                int cauHoi = Int32.Parse(((DataRowView)bdsChiTietBaiThi[i])["CAUHOI"].ToString());
+                string noiDung = ((DataRowView)bdsChiTietBaiThi[i])["NOIDUNG"].ToString();
+                string A = ((DataRowView)bdsChiTietBaiThi[i])["A"].ToString();
+                string B = ((DataRowView)bdsChiTietBaiThi[i])["B"].ToString();
+                string C = ((DataRowView)bdsChiTietBaiThi[i])["C"].ToString();
+                string D = ((DataRowView)bdsChiTietBaiThi[i])["D"].ToString();
+                string dapAn = ((DataRowView)bdsChiTietBaiThi[i])["DAP_AN"].ToString();
+                string traLoi = dapAn[i].ToString();
 
+                string strLenh1 = "INSERT INTO CHITIET_BAITHI (MABD, CAUHOI, NOIDUNG, A, B, C, D, DAP_AN, TRALOI) VALUES('" + maBD + " , " + cauHoi + ", '" + noiDung + "' , '" + A + "' , '" + B +"' , '" + C + "' , '" + D + "' , '" + dapAn + "' , '" + traLoi + "')";
+                Program.myReader = Program.ExecSqlDataReader(strLenh1);
+                Program.myReader.Read();
+                Program.myReader.Close();
+                Program.conn.Close();
+            }
         }
 
         private void ThemVaoBangDiem(float diem)
@@ -324,6 +346,7 @@ namespace CSDLPT
                 }
             }
             ThemVaoBangDiem(((float)cauDung / Int32.Parse(bdsChiTietBaiThi.Count.ToString())) * 10);
+
             MessageBox.Show("Điểm số của bạn là :" + ((float)cauDung / Int32.Parse(bdsChiTietBaiThi.Count.ToString())) * 10
                 + "\nSố câu đúng: " + cauDung
                 + "\nTổng số câu hỏi: " + Int32.Parse(bdsChiTietBaiThi.Count.ToString()),

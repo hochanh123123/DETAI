@@ -28,10 +28,10 @@ namespace CSDLPT
 
         private void frmSinhVien_Load(object sender, EventArgs e)
         {
+            dS.EnforceConstraints = false; //khong kt khao ngoai
             // TODO: This line of code loads data into the 'dS.V_DSPM' table. You can move, or remove it, as needed.
             this.v_DSPMTableAdapter.Fill(this.dS.V_DSPM);
-
-            dS.EnforceConstraints = false; //khong kt khao ngoai
+            
             // TODO: This line of code loads data into the 'dS.DSKHOA' table. You can move, or remove it, as needed.
             this.dSKHOATableAdapter.Connection.ConnectionString = Program.connstr; //chay tren tai khaon moi nhat khi dang nhap
             this.dSKHOATableAdapter.Fill(this.dS.DSKHOA);
@@ -66,8 +66,10 @@ namespace CSDLPT
                 btnGhi.Enabled = false;
                 cmbCoSo.Enabled = false;
             }
+
+            txtMaKH.Text = cmbTenKhoa.SelectedValue.ToString();
         }
-        private void btnThem_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsLop.Position;
             panelControlLop.Enabled = true;
@@ -81,6 +83,9 @@ namespace CSDLPT
             btnThoat.Enabled = false;
             btnGhi.Enabled = true;
             txtMaLop.Enabled = true;
+
+            cmbTenKhoa.SelectedIndex = 0;
+            txtMaKH.Text = cmbTenKhoa.SelectedIndex.ToString();
 
             this.bdsLop.AddNew(); //Them mot muc moi vao danh sach
             txtMaLop.Focus(); //dieu khien con tro toi o textbox
@@ -504,8 +509,9 @@ namespace CSDLPT
             else
             {
                 Program.mlogin = Program.mloginDN;
-                Program.password = Program.mloginDN;
+                Program.password = Program.passwordDN;
             }
+
             if (Program.KetNoi() == 0)
             {
                 MessageBox.Show("Lỗi kết nối về cơ sở mới", "", MessageBoxButtons.OK);
@@ -515,16 +521,20 @@ namespace CSDLPT
                 try
                 {
                     this.dSKHOATableAdapter.Connection.ConnectionString = Program.connstr; //chay tren tai khaon moi nhat khi dang nhap
-                    this.dSKHOATableAdapter.Fill(this.dS.DSKHOA);
-
                     this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
-                    this.lOPTableAdapter.Fill(this.dS.LOP);
-
                     this.sINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
+
+                    this.dSKHOATableAdapter.Fill(this.dS.DSKHOA);
+                    this.lOPTableAdapter.Fill(this.dS.LOP);
                     this.sINHVIENTableAdapter.Fill(this.dS.SINHVIEN);
                 }
                 catch (Exception ex) { }
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnThoatSV_Click(object sender, EventArgs e)

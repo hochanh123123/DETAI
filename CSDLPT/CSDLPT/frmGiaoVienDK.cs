@@ -41,8 +41,8 @@ namespace CSDLPT
             this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
 
             panelControl1.Enabled = false;
-            gcGiaoVienDK.Enabled = false;
-            gcGiaoVienDK.UseDisabledStatePainter = false; //khong phan biet mau
+            //gcGiaoVienDK.Enabled = false;
+            //gcGiaoVienDK.UseDisabledStatePainter = false; //khong phan biet mau
 
             cmbTrinhDo.Items.Add("A");
             cmbTrinhDo.Items.Add("B");
@@ -72,25 +72,25 @@ namespace CSDLPT
             cmbCoSo.ValueMember = "TENSERVER";
             cmbCoSo.SelectedIndex = Program.mCoso;
 
-            //if (Program.mGroup == "Truong")
-            //{
-            //    panelControl1.Enabled = false;
-            //    gcGiaoVienDK.Enabled = false;
-            //    btnThem.Enabled = false;
-            //    btnSua.Enabled = false;
-            //    btnXoa.Enabled = false;
-            //    btnPhucHoi.Enabled = false;
-            //    btnRefresh.Enabled = false;
-            //    btnThoat.Enabled = true;
-            //    btnGhi.Enabled = false;
-            //    cmbCoSo.Enabled = true;
-            //}
-            //else
-            //{
-            //    //gcMonHoc.Enabled = false;
-            //    btnGhi.Enabled = false;
-            //    cmbCoSo.Enabled = false;
-            //}
+            if (Program.mGroup == "Truong")
+            {
+                panelControl1.Enabled = false;
+                gcGiaoVienDK.Enabled = false;
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnPhucHoi.Enabled = false;
+                btnRefresh.Enabled = false;
+                btnThoat.Enabled = true;
+                btnGhi.Enabled = false;
+                cmbCoSo.Enabled = true;
+            }
+            else
+            {
+                //gcMonHoc.Enabled = false;
+                btnGhi.Enabled = false;
+                cmbCoSo.Enabled = false;
+            }
         }
 
         private void cmbHoTen_SelectedIndexChanged(object sender, EventArgs e)
@@ -374,5 +374,48 @@ namespace CSDLPT
             }
         }
 
+        private void cmbCoSo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbCoSo.SelectedValue.ToString() == "System.Data.DataRowView") return;
+                Program.servername = cmbCoSo.SelectedValue.ToString();
+            }
+            catch (Exception) { };
+            if (cmbCoSo.SelectedIndex != Program.mCoso)
+            {
+                Program.mlogin = Program.remotelogin;
+                Program.password = Program.remotepassword;
+            }
+            else
+            {
+                Program.mlogin = Program.mloginDN;
+                Program.password = Program.passwordDN;
+            }
+
+            MessageBox.Show("dd " + Program.mlogin + " " + Program.password, "", MessageBoxButtons.OK);
+
+
+            if (Program.KetNoi() == 0)
+            {
+                MessageBox.Show("Lỗi kết nối về cơ sở mới", "", MessageBoxButtons.OK);
+            }
+            else
+            {
+                try
+                {
+                    this.dSLOPTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.dSMHTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.dSGVTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.gIAOVIEN_DANGKYTableAdapter.Connection.ConnectionString = Program.connstr;
+
+                    this.dSLOPTableAdapter.Fill(this.dS.DSLOP);
+                    this.dSMHTableAdapter.Fill(this.dS.DSMH);
+                    this.dSGVTableAdapter.Fill(this.dS.DSGV);
+                    this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
+                }
+                catch (Exception ex) { }
+            }
+        }
     }
 }
