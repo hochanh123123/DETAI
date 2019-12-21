@@ -454,7 +454,7 @@
             this.ribbonPage2.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup6});
             this.ribbonPage2.Name = "ribbonPage2";
-            this.ribbonPage2.Text = "Cấu hình";
+            this.ribbonPage2.Text = "Hệ thống";
             // 
             // ribbonPageGroup6
             // 

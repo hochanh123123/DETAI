@@ -40,12 +40,7 @@ namespace CSDLPT
             // TODO: This line of code loads data into the 'dS.GIAOVIEN_DANGKY' table. You can move, or remove it, as needed.
             this.gIAOVIEN_DANGKYTableAdapter.Connection.ConnectionString = Program.connstr;
             this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
-
-            //DataTable dt = new DataTable();
-            //dt = Program.ExecSqlDataTable("SELECT MACS FROM dbo.COSO");
-            //BindingSource bdsMH = new BindingSource();
-            //bdsMH.Bi
-
+            
             cmbCoSo.DataSource = Program.bds_dspm;
             cmbCoSo.DisplayMember = "TENCS";
             cmbCoSo.ValueMember = "TENSERVER";
@@ -141,6 +136,34 @@ namespace CSDLPT
                 return;
             }
 
+            string strLenh = "EXEC SP_TimKiemMH '" + txtMaMH.Text + "'";
+            Program.myReader = Program.ExecSqlDataReader(strLenh);
+            Program.myReader.Read();
+            int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+            if (kq == 1)
+            {
+                MessageBox.Show("Mã Môn học đã tồn tại. Mời nhập mã môn học khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Program.myReader.Close();
+                Program.conn.Close();
+                txtMaMH.Focus();
+                return;
+            }
+            Program.myReader.Close();
+
+            string strLenh1 = "EXEC SP_TimKiemTenMH '" + txtTenMH.Text + "'";
+            Program.myReader = Program.ExecSqlDataReader(strLenh1);
+            Program.myReader.Read();
+            int kq1 = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+            if (kq1 == 1)
+            {
+                MessageBox.Show("Tên Môn học không được trùng. Mời nhập tên môn học khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Program.myReader.Close();
+                Program.conn.Close();
+                txtTenMH.Focus();
+                return;
+            }
+            Program.myReader.Close();
+
             try
             {
                 bdsMonHoc.EndEdit(); //ket thuc qua trinh hieu chinh
@@ -149,17 +172,7 @@ namespace CSDLPT
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("unique"))
-                {
-                    MessageBox.Show("Mã Môn học đã tồn tại. Mời nhập mã môn học khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Program.conn.Close();
-                    txtMaMH.Focus();
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Lỗi ghi môn học", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+                MessageBox.Show("Lỗi ghi môn học", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
             panelControl1.Enabled = false;

@@ -76,27 +76,26 @@ namespace CSDLPT
 
             try
             {
-                MessageBox.Show(" " + txtTaiKhoan.Text + " " + cmbTenGV.SelectedValue.ToString() + " " + cmbNhom.SelectedItem.ToString(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                String strLenh = "EXEC sp_TaoTaiKhoan '" + txtTaiKhoan.Text + "', '" + txtMatKhau.Text + "', '" + cmbTenGV.SelectedValue.ToString() + "' , '" + cmbNhom.SelectedItem.ToString();
+                string strLenh = "EXEC sp_TaoTaiKhoan '" + txtTaiKhoan.Text + "', '" + txtMatKhau.Text + "', '" + cmbTenGV.SelectedValue.ToString() + "' , '" + cmbNhom.SelectedItem.ToString() + "'";
                 Program.myReader = Program.ExecSqlDataReader(strLenh);
                 if (Program.myReader == null) return;
                 Program.myReader.Read();
+                int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+                if (kq == 1)
+                {
+                    MessageBox.Show("Tên tài khoản đã tồn tại. Mời nhập tên tài khoản khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Program.myReader.Close();
+                    Program.conn.Close();
+                    txtTaiKhoan.Focus();
+                    return;
+                }
+                Program.myReader.Close();
                 MessageBox.Show("Tạo tài khoản thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Program.myReader.Close();
             }
             catch (Exception ex)
             {
-                if(ex.Message.Contains("unique") || ex.Message.Contains("PRIMARY"))
-                {
-                    MessageBox.Show("Tên tài khoản đã tồn tại. Mời nhập tài khoản khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    txtTaiKhoan.Focus();
-                    Program.myReader.Close();
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Lỗi tạo tài khoản", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+                MessageBox.Show("Lỗi tạo tài khoản", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

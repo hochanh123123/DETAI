@@ -152,7 +152,7 @@
             // tRINHDOLabel
             // 
             tRINHDOLabel.AutoSize = true;
-            tRINHDOLabel.Location = new System.Drawing.Point(64, 139);
+            tRINHDOLabel.Location = new System.Drawing.Point(64, 141);
             tRINHDOLabel.Name = "tRINHDOLabel";
             tRINHDOLabel.Size = new System.Drawing.Size(72, 17);
             tRINHDOLabel.TabIndex = 6;
@@ -215,7 +215,7 @@
             // tENLOPLabel
             // 
             tENLOPLabel.AutoSize = true;
-            tENLOPLabel.Location = new System.Drawing.Point(64, 105);
+            tENLOPLabel.Location = new System.Drawing.Point(64, 109);
             tENLOPLabel.Name = "tENLOPLabel";
             tENLOPLabel.Size = new System.Drawing.Size(63, 17);
             tENLOPLabel.TabIndex = 20;
@@ -544,7 +544,7 @@
             this.cmbTenLop.DataSource = this.bdsLop;
             this.cmbTenLop.DisplayMember = "TENLOP";
             this.cmbTenLop.FormattingEnabled = true;
-            this.cmbTenLop.Location = new System.Drawing.Point(148, 102);
+            this.cmbTenLop.Location = new System.Drawing.Point(148, 106);
             this.cmbTenLop.Name = "cmbTenLop";
             this.cmbTenLop.Size = new System.Drawing.Size(310, 24);
             this.cmbTenLop.TabIndex = 21;
@@ -624,7 +624,7 @@
             // 
             this.cmbTrinhDo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsGiaoVienDK, "TRINHDO", true));
             this.cmbTrinhDo.FormattingEnabled = true;
-            this.cmbTrinhDo.Location = new System.Drawing.Point(148, 136);
+            this.cmbTrinhDo.Location = new System.Drawing.Point(148, 138);
             this.cmbTrinhDo.Name = "cmbTrinhDo";
             this.cmbTrinhDo.Size = new System.Drawing.Size(310, 24);
             this.cmbTrinhDo.TabIndex = 7;

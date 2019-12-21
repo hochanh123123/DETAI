@@ -393,9 +393,6 @@ namespace CSDLPT
                 Program.password = Program.passwordDN;
             }
 
-            MessageBox.Show("dd " + Program.mlogin + " " + Program.password, "", MessageBoxButtons.OK);
-
-
             if (Program.KetNoi() == 0)
             {
                 MessageBox.Show("Lỗi kết nối về cơ sở mới", "", MessageBoxButtons.OK);

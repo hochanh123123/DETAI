@@ -99,8 +99,11 @@
             this.btnXoaSV = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPhucHoiSV = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRefreshSV = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnThoatSV = new System.Windows.Forms.ToolStripMenuItem();
             this.v_DSPMTableAdapter = new CSDLPT.DSTableAdapters.V_DSPMTableAdapter();
+            this.bdsBangDiem = new System.Windows.Forms.BindingSource(this.components);
+            this.bANGDIEMTableAdapter = new CSDLPT.DSTableAdapters.BANGDIEMTableAdapter();
+            this.bdsGiaoVienDK = new System.Windows.Forms.BindingSource(this.components);
+            this.gIAOVIEN_DANGKYTableAdapter = new CSDLPT.DSTableAdapters.GIAOVIEN_DANGKYTableAdapter();
             tENLOPLabel = new System.Windows.Forms.Label();
             mALOPLabel = new System.Windows.Forms.Label();
             tENKHLabel = new System.Windows.Forms.Label();
@@ -139,6 +142,8 @@
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sINHVIENDataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsBangDiem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsGiaoVienDK)).BeginInit();
             this.SuspendLayout();
             // 
             // tENLOPLabel
@@ -420,7 +425,6 @@
             this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 40;
             this.label1.Text = "CƠ SỞ:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // bdsLop
             // 
@@ -732,63 +736,73 @@
             this.btnGhiSV,
             this.btnXoaSV,
             this.btnPhucHoiSV,
-            this.btnRefreshSV,
-            this.btnThoatSV});
+            this.btnRefreshSV});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 172);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 176);
             // 
             // btnThemSV
             // 
             this.btnThemSV.Name = "btnThemSV";
-            this.btnThemSV.Size = new System.Drawing.Size(134, 24);
+            this.btnThemSV.Size = new System.Drawing.Size(210, 24);
             this.btnThemSV.Text = "Thêm";
             this.btnThemSV.Click += new System.EventHandler(this.btnThemSV_Click);
             // 
             // btnSuaSV
             // 
             this.btnSuaSV.Name = "btnSuaSV";
-            this.btnSuaSV.Size = new System.Drawing.Size(134, 24);
+            this.btnSuaSV.Size = new System.Drawing.Size(210, 24);
             this.btnSuaSV.Text = "Sửa";
             this.btnSuaSV.Click += new System.EventHandler(this.btnSuaSV_Click);
             // 
             // btnGhiSV
             // 
             this.btnGhiSV.Name = "btnGhiSV";
-            this.btnGhiSV.Size = new System.Drawing.Size(134, 24);
+            this.btnGhiSV.Size = new System.Drawing.Size(210, 24);
             this.btnGhiSV.Text = "Ghi";
             this.btnGhiSV.Click += new System.EventHandler(this.btnGhiSV_Click);
             // 
             // btnXoaSV
             // 
             this.btnXoaSV.Name = "btnXoaSV";
-            this.btnXoaSV.Size = new System.Drawing.Size(134, 24);
+            this.btnXoaSV.Size = new System.Drawing.Size(210, 24);
             this.btnXoaSV.Text = "Xóa";
             this.btnXoaSV.Click += new System.EventHandler(this.btnXoaSV_Click);
             // 
             // btnPhucHoiSV
             // 
             this.btnPhucHoiSV.Name = "btnPhucHoiSV";
-            this.btnPhucHoiSV.Size = new System.Drawing.Size(134, 24);
+            this.btnPhucHoiSV.Size = new System.Drawing.Size(210, 24);
             this.btnPhucHoiSV.Text = "Phục hồi";
             this.btnPhucHoiSV.Click += new System.EventHandler(this.btnPhucHoiSV_Click);
             // 
             // btnRefreshSV
             // 
             this.btnRefreshSV.Name = "btnRefreshSV";
-            this.btnRefreshSV.Size = new System.Drawing.Size(134, 24);
+            this.btnRefreshSV.Size = new System.Drawing.Size(210, 24);
             this.btnRefreshSV.Text = "Refresh";
             this.btnRefreshSV.Click += new System.EventHandler(this.btnRefreshSV_Click);
-            // 
-            // btnThoatSV
-            // 
-            this.btnThoatSV.Name = "btnThoatSV";
-            this.btnThoatSV.Size = new System.Drawing.Size(134, 24);
-            this.btnThoatSV.Text = "Thoát";
-            this.btnThoatSV.Click += new System.EventHandler(this.btnThoatSV_Click);
             // 
             // v_DSPMTableAdapter
             // 
             this.v_DSPMTableAdapter.ClearBeforeFill = true;
+            // 
+            // bdsBangDiem
+            // 
+            this.bdsBangDiem.DataMember = "FK_BANGDIEM_SINHVIEN";
+            this.bdsBangDiem.DataSource = this.bdsSinhVien;
+            // 
+            // bANGDIEMTableAdapter
+            // 
+            this.bANGDIEMTableAdapter.ClearBeforeFill = true;
+            // 
+            // bdsGiaoVienDK
+            // 
+            this.bdsGiaoVienDK.DataMember = "FK_GIAOVIEN_DANGKY_LOP";
+            this.bdsGiaoVienDK.DataSource = this.bdsLop;
+            // 
+            // gIAOVIEN_DANGKYTableAdapter
+            // 
+            this.gIAOVIEN_DANGKYTableAdapter.ClearBeforeFill = true;
             // 
             // frmSinhVien
             // 
@@ -839,6 +853,8 @@
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sINHVIENDataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bdsBangDiem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdsGiaoVienDK)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -897,7 +913,6 @@
         private DevExpress.XtraEditors.TextEdit txtTenLop;
         private System.Windows.Forms.ToolStripMenuItem btnPhucHoiSV;
         private System.Windows.Forms.ToolStripMenuItem btnRefreshSV;
-        private System.Windows.Forms.ToolStripMenuItem btnThoatSV;
         private DevExpress.XtraEditors.TextEdit txtMaSV;
         private DevExpress.XtraEditors.TextEdit txtHo;
         private DevExpress.XtraEditors.TextEdit txtTen;
@@ -906,5 +921,9 @@
         private DevExpress.XtraEditors.TextEdit txtMaLop2;
         private System.Windows.Forms.BindingSource vDSPMBindingSource;
         private DSTableAdapters.V_DSPMTableAdapter v_DSPMTableAdapter;
+        private System.Windows.Forms.BindingSource bdsBangDiem;
+        private DSTableAdapters.BANGDIEMTableAdapter bANGDIEMTableAdapter;
+        private System.Windows.Forms.BindingSource bdsGiaoVienDK;
+        private DSTableAdapters.GIAOVIEN_DANGKYTableAdapter gIAOVIEN_DANGKYTableAdapter;
     }
 }

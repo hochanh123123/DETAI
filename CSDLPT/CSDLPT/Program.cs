@@ -30,6 +30,8 @@ namespace CSDLPT
         public static String passwordDN = "";
         public static String mGroup = "";
         public static String mHoten = "";
+        public static String mMaLop = "";
+        public static String mLop = "";
         public static int mCoso = 0;
 
         public static BindingSource bds_dspm = new BindingSource();  // giữ bdsPM khi đăng nhập

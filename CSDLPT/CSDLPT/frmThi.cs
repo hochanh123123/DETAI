@@ -130,18 +130,25 @@ namespace CSDLPT
             }
             else
             {
-                string strLenh = "EXEC SP_ThongTinSV '" + Program.mlogin + "'";
-                Program.myReader = Program.ExecSqlDataReader(strLenh);
-                if (Program.myReader == null) return;
-                Program.myReader.Read();
-                txtMaLop.Text = Program.myReader.GetString(0);
-                txtTenLop.Text = Program.myReader.GetString(1);
-                txtHoTen.Text = Program.myReader.GetString(2) + Program.myReader.GetString(3);
-                maSV = Program.myReader.GetString(4);
+                txtMaLop.Text = Program.mMaLop;
+                txtTenLop.Text = Program.mLop;
+                txtHoTen.Text = Program.mHoten;
+                maSV = Program.username;
                 panelControlTopLeft.Enabled = false;
-                Program.myReader.Close();
-                Program.conn.Close();
                 btnXemKetQua.Enabled = true;
+
+                //string strLenh = "EXEC SP_ThongTinSV '" + Program.mlogin + "'";
+                //Program.myReader = Program.ExecSqlDataReader(strLenh);
+                //if (Program.myReader == null) return;
+                //Program.myReader.Read();
+                //txtMaLop.Text = Program.myReader.GetString(0);
+                //txtTenLop.Text = Program.myReader.GetString(1);
+                //txtHoTen.Text = Program.myReader.GetString(2) + Program.myReader.GetString(3);
+                //maSV = Program.myReader.GetString(4);
+                //panelControlTopLeft.Enabled = false;
+                //Program.myReader.Close();
+                //Program.conn.Close();
+                //btnXemKetQua.Enabled = true;
             }
         }
 
@@ -234,7 +241,6 @@ namespace CSDLPT
 
         private void btnNopBai_Click(object sender, EventArgs e)
         {
-            //((DataRowView)bdsChiTietBaiThi[i])["DAP_AN"].
             if (MessageBox.Show("Bạn có chắc chắn muốn Nộp bài thi không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.Yes)
             {
                 timer1.Stop();
