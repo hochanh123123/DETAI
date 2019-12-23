@@ -136,19 +136,6 @@ namespace CSDLPT
                 maSV = Program.username;
                 panelControlTopLeft.Enabled = false;
                 btnXemKetQua.Enabled = true;
-
-                //string strLenh = "EXEC SP_ThongTinSV '" + Program.mlogin + "'";
-                //Program.myReader = Program.ExecSqlDataReader(strLenh);
-                //if (Program.myReader == null) return;
-                //Program.myReader.Read();
-                //txtMaLop.Text = Program.myReader.GetString(0);
-                //txtTenLop.Text = Program.myReader.GetString(1);
-                //txtHoTen.Text = Program.myReader.GetString(2) + Program.myReader.GetString(3);
-                //maSV = Program.myReader.GetString(4);
-                //panelControlTopLeft.Enabled = false;
-                //Program.myReader.Close();
-                //Program.conn.Close();
-                //btnXemKetQua.Enabled = true;
             }
         }
 
@@ -248,7 +235,7 @@ namespace CSDLPT
                 btnBatDauThi.Enabled = false;
                 btnThoat.Enabled = true;
                 btnXemKetQua.Enabled = true;
-                TinhDiem(); 
+                TinhDiem();
             }
         }
 
@@ -307,29 +294,30 @@ namespace CSDLPT
 
         private void ThemVaoChiTietBaiThi()
         {
+            string strLenh = "SELECT MABD FROM BANGDIEM WHERE MASV = '" + maSV + "' AND MAMH = '" + cmbTenMH.SelectedValue.ToString() + "' AND LAN = " + cmbLan.SelectedItem.ToString();
+            Program.myReader = Program.ExecSqlDataReader(strLenh);
+            Program.myReader.Read();
+            int maBD = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+            Program.myReader.Close();
+
             for (int i = 0; i < Int32.Parse(txtSoCauThi.Text); i++)
             {
-                string strLenh = "SELECT MABD FROM BANGDIEM WHERE MASV = '" + maSV + "' AND MAMH = '" + cmbTenMH.SelectedValue.ToString() + "' AND LAN = " + cmbLan.SelectedItem.ToString() ;
-                Program.myReader = Program.ExecSqlDataReader(strLenh);
-                Program.myReader.Read();
-                int maBD = Int32.Parse(Program.myReader.GetString(0).ToString());
-                Program.myReader.Close();
-                
+                string traLoi = dapAn[i].ToString();
                 int cauHoi = Int32.Parse(((DataRowView)bdsChiTietBaiThi[i])["CAUHOI"].ToString());
                 string noiDung = ((DataRowView)bdsChiTietBaiThi[i])["NOIDUNG"].ToString();
                 string A = ((DataRowView)bdsChiTietBaiThi[i])["A"].ToString();
                 string B = ((DataRowView)bdsChiTietBaiThi[i])["B"].ToString();
                 string C = ((DataRowView)bdsChiTietBaiThi[i])["C"].ToString();
                 string D = ((DataRowView)bdsChiTietBaiThi[i])["D"].ToString();
-                string dapAn = ((DataRowView)bdsChiTietBaiThi[i])["DAP_AN"].ToString();
-                string traLoi = dapAn[i].ToString();
+                string dapAnCH = ((DataRowView)bdsChiTietBaiThi[i])["DAP_AN"].ToString();
 
-                string strLenh1 = "INSERT INTO CHITIET_BAITHI (MABD, CAUHOI, NOIDUNG, A, B, C, D, DAP_AN, TRALOI) VALUES('" + maBD + " , " + cauHoi + ", '" + noiDung + "' , '" + A + "' , '" + B +"' , '" + C + "' , '" + D + "' , '" + dapAn + "' , '" + traLoi + "')";
+                string strLenh1 = "INSERT INTO CHITIET_BAITHI (MABD, CAUHOI, NOIDUNG, A, B, C, D, DAP_AN, TRALOI) VALUES(" + maBD + " , " + cauHoi + ", '" + noiDung + "' , '" + A + "' , '" + B + "' , '" + C + "' , '" + D + "' , '" + dapAnCH + "' , '" + traLoi + "')";
                 Program.myReader = Program.ExecSqlDataReader(strLenh1);
                 Program.myReader.Read();
                 Program.myReader.Close();
-                Program.conn.Close();
             }
+
+            Program.conn.Close();
         }
 
         private void ThemVaoBangDiem(float diem)
@@ -339,6 +327,8 @@ namespace CSDLPT
             Program.myReader.Read();
             Program.myReader.Close();
             Program.conn.Close();
+
+            ThemVaoChiTietBaiThi();
         }
 
         private void TinhDiem()
@@ -351,7 +341,15 @@ namespace CSDLPT
                     cauDung = cauDung + 1;
                 }
             }
-            ThemVaoBangDiem(((float)cauDung / Int32.Parse(bdsChiTietBaiThi.Count.ToString())) * 10);
+
+            if (Program.mGroup == "Sinhvien")
+            {
+                ThemVaoBangDiem(((float)cauDung / Int32.Parse(bdsChiTietBaiThi.Count.ToString())) * 10);
+            }
+            else
+            {
+                btnXemKetQua.Enabled = false;
+            }
 
             MessageBox.Show("Điểm số của bạn là :" + ((float)cauDung / Int32.Parse(bdsChiTietBaiThi.Count.ToString())) * 10
                 + "\nSố câu đúng: " + cauDung
