@@ -121,6 +121,20 @@ namespace CSDLPT
                     txtMaMH.Focus();
                     return;
                 }
+
+                string strLenh = "EXEC SP_TimKiemMH '" + txtMaMH.Text + "'";
+                Program.myReader = Program.ExecSqlDataReader(strLenh);
+                Program.myReader.Read();
+                int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+                if (kq == 1)
+                {
+                    MessageBox.Show("Mã Môn học đã tồn tại. Mời nhập mã môn học khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Program.myReader.Close();
+                    Program.conn.Close();
+                    txtMaMH.Focus();
+                    return;
+                }
+                Program.myReader.Close();
             }
 
             if (txtTenMH.Text.Trim() == "")
@@ -135,20 +149,6 @@ namespace CSDLPT
                 txtTenMH.Focus();
                 return;
             }
-
-            string strLenh = "EXEC SP_TimKiemMH '" + txtMaMH.Text + "'";
-            Program.myReader = Program.ExecSqlDataReader(strLenh);
-            Program.myReader.Read();
-            int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
-            if (kq == 1)
-            {
-                MessageBox.Show("Mã Môn học đã tồn tại. Mời nhập mã môn học khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                Program.myReader.Close();
-                Program.conn.Close();
-                txtMaMH.Focus();
-                return;
-            }
-            Program.myReader.Close();
 
             string strLenh1 = "EXEC SP_TimKiemTenMH '" + txtTenMH.Text + "'";
             Program.myReader = Program.ExecSqlDataReader(strLenh1);

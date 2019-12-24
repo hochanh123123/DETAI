@@ -143,8 +143,6 @@
             // 
             // cmbCoSo
             // 
-            this.cmbCoSo.DataSource = this.vDSPMBindingSource;
-            this.cmbCoSo.DisplayMember = "TENCS";
             this.cmbCoSo.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCoSo.FormattingEnabled = true;
             this.cmbCoSo.Location = new System.Drawing.Point(525, 102);
@@ -152,7 +150,6 @@
             this.cmbCoSo.Name = "cmbCoSo";
             this.cmbCoSo.Size = new System.Drawing.Size(460, 30);
             this.cmbCoSo.TabIndex = 41;
-            this.cmbCoSo.ValueMember = "TENSERVER";
             this.cmbCoSo.SelectedIndexChanged += new System.EventHandler(this.cmbCoSo_SelectedIndexChanged);
             // 
             // vDSPMBindingSource

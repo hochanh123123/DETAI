@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.XtraReports.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,9 +20,10 @@ namespace CSDLPT
 
         private void frmXemDSDangKy_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dS.V_DSPM' table. You can move, or remove it, as needed.
-            this.v_DSPMTableAdapter.Connection.ConnectionString = Program.connstr;
-            this.v_DSPMTableAdapter.Fill(this.dS.V_DSPM);
+            cmbCoSo.DataSource = Program.bds_dspm;
+            cmbCoSo.DisplayMember = "TENCS";
+            cmbCoSo.ValueMember = "TENSERVER";
+            cmbCoSo.SelectedIndex = Program.mCoso;
         }
 
         private void btnXem_Click(object sender, EventArgs e)
@@ -44,7 +46,22 @@ namespace CSDLPT
                 dateEditDenNgay.Focus();
                 return;
             }
-
+            
+            Xrpt_XemDSDangKy xrpt = new Xrpt_XemDSDangKy(dateEditNgayBatDau.Text, dateEditDenNgay.Text);
+            string tenCoSo = "";
+            if(Program.mCoso == 0)
+            {
+                tenCoSo = "CƠ SỞ 1";
+            }
+            else if (Program.mCoso == 1)
+            {
+                tenCoSo = "CƠ SỞ 2";
+            }
+            xrpt.lbCoSo.Text = tenCoSo;
+            xrpt.lbTuNgay.Text = dateEditNgayBatDau.Text;
+            xrpt.lbDenNgay.Text = dateEditDenNgay.Text;
+            ReportPrintTool print = new ReportPrintTool(xrpt);
+            print.ShowPreviewDialog();
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -82,8 +99,6 @@ namespace CSDLPT
             {
                 try
                 {
-                    this.v_DSPMTableAdapter.Connection.ConnectionString = Program.connstr;
-                    this.v_DSPMTableAdapter.Fill(this.dS.V_DSPM);
                 }
                 catch (Exception ex) { }
             }

@@ -28,12 +28,11 @@ namespace CSDLPT
 
         private void frmSinhVien_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dS.GIAOVIEN_DANGKY' table. You can move, or remove it, as needed.
-            this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
-           
             dS.EnforceConstraints = false; //khong kt khao ngoai
-            // TODO: This line of code loads data into the 'dS.V_DSPM' table. You can move, or remove it, as needed.
-            this.v_DSPMTableAdapter.Fill(this.dS.V_DSPM);
+
+            // TODO: This line of code loads data into the 'dS.GIAOVIEN_DANGKY' table. You can move, or remove it, as needed.
+            this.gIAOVIEN_DANGKYTableAdapter.Connection.ConnectionString = Program.connstr; 
+            this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
             
             // TODO: This line of code loads data into the 'dS.DSKHOA' table. You can move, or remove it, as needed.
             this.dSKHOATableAdapter.Connection.ConnectionString = Program.connstr; //chay tren tai khaon moi nhat khi dang nhap
@@ -74,11 +73,12 @@ namespace CSDLPT
                 cmbCoSo.Enabled = false;
             }
 
-            txtMaKH.Text = cmbTenKhoa.SelectedValue.ToString();
+            cmbTenKhoa.SelectedIndex = 0;
         }
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.bdsLop.AddNew(); //Them mot muc moi vao danh sach
+            cmbTenKhoa.SelectedIndex = 0;
 
             vitri = bdsLop.Position;
             panelControlLop.Enabled = true;
@@ -92,9 +92,6 @@ namespace CSDLPT
             btnThoat.Enabled = false;
             btnGhi.Enabled = true;
             txtMaLop.Enabled = true;
-
-            cmbTenKhoa.SelectedIndex = 0;
-            txtMaKH.Text = cmbTenKhoa.SelectedIndex.ToString();
 
            
             txtMaLop.Focus(); //dieu khien con tro toi o textbox
@@ -133,6 +130,19 @@ namespace CSDLPT
                     txtMaLop.Focus();
                     return;
                 }
+
+                string strLenh = "EXEC SP_KiemTraLopTonTai '" + txtMaLop.Text + "'";
+                Program.myReader = Program.ExecSqlDataReader(strLenh);
+                Program.myReader.Read();
+                int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+                if (kq == 1)
+                {
+                    MessageBox.Show("Mã Lớp đã tồn tại. Mời nhập mã lớp khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Program.myReader.Close();
+                    txtMaLop.Focus();
+                    return;
+                }
+                Program.myReader.Close();
             }
 
             if (txtTenLop.Text.Trim() == "")
@@ -147,19 +157,6 @@ namespace CSDLPT
                 txtTenLop.Focus();
                 return;
             }
-
-            string strLenh = "EXEC SP_KiemTraLopTonTai '" + txtMaLop.Text + "'";
-            Program.myReader = Program.ExecSqlDataReader(strLenh);
-            Program.myReader.Read();
-            int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
-            if(kq == 1)
-            {
-                MessageBox.Show("Mã Lớp đã tồn tại. Mời nhập mã lớp khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                Program.myReader.Close();
-                txtMaLop.Focus();
-                return;
-            }
-            Program.myReader.Close();
 
             string strLenh1 = "EXEC SP_KiemTraTenLopTonTai '" + txtTenLop.Text + "'";
             Program.myReader = Program.ExecSqlDataReader(strLenh1);
@@ -348,6 +345,19 @@ namespace CSDLPT
                     txtMaSV.Focus();
                     return;
                 }
+
+                string strLenh = "EXEC SP_KiemTraSVTonTai '" + txtMaSV.Text + "'";
+                Program.myReader = Program.ExecSqlDataReader(strLenh);
+                Program.myReader.Read();
+                int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+                if (kq == 1)
+                {
+                    MessageBox.Show("Mã SV đã tồn tại. Mời nhập mã SV khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Program.myReader.Close();
+                    txtMaLop.Focus();
+                    return;
+                }
+                Program.myReader.Close();
             }
 
             if (txtHo.Text.Trim() == "")
@@ -394,19 +404,6 @@ namespace CSDLPT
                 return;
             }
 
-            string strLenh = "EXEC SP_KiemTraSVTonTai '" + txtMaSV.Text + "'";
-            Program.myReader = Program.ExecSqlDataReader(strLenh);
-            Program.myReader.Read();
-            int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
-            if (kq == 1)
-            {
-                MessageBox.Show("Mã SV đã tồn tại. Mời nhập mã SV khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                Program.myReader.Close();
-                txtMaLop.Focus();
-                return;
-            }
-            Program.myReader.Close();
-
             try
             {
                 bdsSinhVien.EndEdit(); //ket thuc qua trinh hieu chinh
@@ -415,17 +412,7 @@ namespace CSDLPT
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("unique") || ex.Message.Contains("PRIMARY"))
-                {
-                    MessageBox.Show("Mã SV đã tồn tại. Mời nhập mã SV khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Program.conn.Close();
-                    txtMaSV.Focus();
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Lỗi ghi SV", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+                MessageBox.Show("Lỗi ghi SV", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
             panelControl1.Enabled = true;

@@ -13,6 +13,7 @@ namespace CSDLPT
 {
     public partial class frmXemKetQua : Form
     {
+        int maBD = 0;
         public frmXemKetQua()
         {
             InitializeComponent();
@@ -20,6 +21,8 @@ namespace CSDLPT
 
         private void frmXemKetQua_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dS.V_DSPM' table. You can move, or remove it, as needed.
+            this.v_DSPMTableAdapter.Fill(this.dS.V_DSPM);
             // TODO: This line of code loads data into the 'dS.DSSV' table. You can move, or remove it, as needed.
             this.dSSVTableAdapter.Connection.ConnectionString = Program.connstr;
             this.dSSVTableAdapter.Fill(this.dS.DSSV);
@@ -40,6 +43,11 @@ namespace CSDLPT
             cmbLan.SelectedIndex = 0;
             cmbTrinhDo.SelectedIndex = 0;
 
+            cmbCoSo.DataSource = Program.bds_dspm;
+            cmbCoSo.DisplayMember = "TENCS";
+            cmbCoSo.ValueMember = "TENSERVER";
+            cmbCoSo.SelectedIndex = Program.mCoso;
+
             if (Program.mGroup == "Sinhvien")
             {
                 cmbHoTen.SelectedValue = Program.username;
@@ -48,50 +56,106 @@ namespace CSDLPT
                 labelCoSo.Visible = false;
                 cmbTrinhDo.Visible = false;
                 cmbCoSo.Visible = false;
+                cmbTenLop.Enabled = false;
+                cmbTenLop.SelectedValue = Program.mMaLop;
+            }
+            gcXemKetQua.Enabled = false;
+        }
+
+        public void KiemTra()
+        {
+            string maSV = "";
+            if (Program.mGroup == "Sinhvien")
+            {
+                maSV = Program.username;
+            }
+            else
+            {
+                maSV = cmbHoTen.SelectedValue.ToString();
             }
 
+            if (Program.mGroup != "Sinhvien")
+            {
+                string lenh = "EXEC SP_KTSVThuocLop '" + maSV + "', '" + cmbTenLop.SelectedValue.ToString() + "'";
+                Program.myReader = Program.ExecSqlDataReader(lenh);
+                Program.myReader.Read();
+                int result = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+                if (result == 0)
+                {
+                    MessageBox.Show("Sinh viên không thuộc lớp này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    Program.myReader.Close();
+                    cmbHoTen.Focus();
+                    return;
+                }
+                Program.myReader.Close();
+            }
+
+            string strLenh = "EXEC SP_KiemTraDaThi '" + maSV + "', '" + cmbTenMH.SelectedValue.ToString() + "',  " + cmbLan.SelectedItem.ToString();
+            Program.myReader = Program.ExecSqlDataReader(strLenh);
+            Program.myReader.Read();
+            int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+            if (kq == 0)
+            {
+                MessageBox.Show("Sinh viên chưa thi môn này lần " + cmbLan.SelectedItem.ToString() + "\nVui lòng chọn lại môn hoặc lần thi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                Program.myReader.Close();
+                cmbTenMH.Focus();
+                return;
+            }
+            maBD = Int32.Parse(Program.myReader.GetInt32(1).ToString());
+            Program.myReader.Close();
+
+            if (Program.mGroup != "Sinhvien")
+            {
+                string lenh2 = "EXEC SP_KTTrinhDo '" + cmbTenMH.SelectedValue.ToString() + "', '" + cmbTenLop.SelectedValue.ToString() + "' , " + cmbLan.SelectedItem.ToString() + " , '" + cmbTrinhDo.SelectedItem.ToString() + "'";
+                Program.myReader = Program.ExecSqlDataReader(lenh2);
+                Program.myReader.Read();
+                int result2 = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+                if (result2 == 0)
+                {
+                    MessageBox.Show("Trình độ không đúng. Xin chọn lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    Program.myReader.Close();
+                    cmbTrinhDo.Focus();
+                    return;
+                }
+                Program.myReader.Close();
+            }
         }
 
         private void btnXem_Click(object sender, EventArgs e)
         {
+            KiemTra();
 
+            this.sP_XemKetQuaTableAdapter.Connection.ConnectionString = Program.connstr;
+            this.sP_XemKetQuaTableAdapter.Fill(this.dS.SP_XemKetQua, maBD);
+
+            string strLenh = "EXEC SP_XemKetQua '" + maBD + "'";
+            Program.myReader = Program.ExecSqlDataReader(strLenh);
+            Program.myReader.Read();
+            Program.myReader.Close();
+            gcXemKetQua.Enabled = true;
+            btnXem.Enabled = false;
         }
 
         private void btnIn_Click(object sender, EventArgs e)
         {
-            if (Program.mGroup == "Sinhvien")
-            {
-                string strLenh = "EXEC SP_KiemTraDaThi '" + Program.username + "', '" + cmbTenMH.SelectedValue.ToString() + "',  " + cmbLan.SelectedItem.ToString();
-                Program.myReader = Program.ExecSqlDataReader(strLenh);
-                Program.myReader.Read();
-                int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
-                if (kq == 0)
-                {
-                    MessageBox.Show("Bạn chưa thi môn này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    Program.myReader.Close();
-                    cmbTenMH.Focus();
-                    return;
-                }
-                int maBD = Int32.Parse(Program.myReader.GetInt32(1).ToString());
-                Program.myReader.Close();
+            KiemTra();
 
-                string strLenh1 = "EXEC SP_ThongTinXemKQ '" + cmbTenMH.SelectedValue.ToString() + "', '" + cmbTenLop.SelectedValue.ToString() + "', " + maBD;
-                Program.myReader = Program.ExecSqlDataReader(strLenh1);
+            string strLenh1 = "EXEC SP_ThongTinXemKQ '" + cmbTenMH.SelectedValue.ToString() + "', '" + cmbTenLop.SelectedValue.ToString() + "', " + maBD;
+            Program.myReader = Program.ExecSqlDataReader(strLenh1);
 
-                Program.myReader.Read();
-                string ngayThi = Program.myReader.GetDateTime(0).ToString();
-                string lan = Program.myReader.GetInt16(1).ToString(); //vi smallint
-                string[] str = ngayThi.Split(' '); 
-                Program.myReader.Close();
-                Xrpt_XemKetQua xrpt = new Xrpt_XemKetQua(maBD);
-                xrpt.lbLop.Text = cmbTenLop.SelectedValue.ToString();
-                xrpt.lbHoTen.Text = Program.mHoten;
-                xrpt.lbMonThi.Text = cmbTenMH.SelectedValue.ToString();
-                xrpt.lbNgayThi.Text = str[0];
-                xrpt.lbLanThi.Text = lan;
-                ReportPrintTool print = new ReportPrintTool(xrpt);
-                print.ShowPreviewDialog();
-            }
+            Program.myReader.Read();
+            string ngayThi = Program.myReader.GetDateTime(0).ToString();
+            string lan = Program.myReader.GetInt16(1).ToString(); //vi smallint
+            string[] str = ngayThi.Split(' ');
+            Program.myReader.Close();
+            Xrpt_XemKetQua xrpt = new Xrpt_XemKetQua(maBD);
+            xrpt.lbLop.Text = cmbTenLop.SelectedValue.ToString();
+            xrpt.lbHoTen.Text = Program.mHoten;
+            xrpt.lbMonThi.Text = cmbTenMH.SelectedValue.ToString();
+            xrpt.lbNgayThi.Text = str[0];
+            xrpt.lbLanThi.Text = lan;
+            ReportPrintTool print = new ReportPrintTool(xrpt);
+            print.ShowPreviewDialog();
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -138,16 +202,6 @@ namespace CSDLPT
                 }
                 catch (Exception ex) { }
             }
-        }
-
-        private void panelControl1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

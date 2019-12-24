@@ -39,8 +39,6 @@
             this.mONHOCTableAdapter = new CSDLPT.DSTableAdapters.MONHOCTableAdapter();
             this.tableAdapterManager = new CSDLPT.DSTableAdapters.TableAdapterManager();
             this.bar3 = new DevExpress.XtraBars.Bar();
-            this.vDSPMBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tRACNGHIEMDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bODETableAdapter = new CSDLPT.DSTableAdapters.BODETableAdapter();
             this.bdsBoDe = new System.Windows.Forms.BindingSource(this.components);
             this.txtTenMH = new DevExpress.XtraEditors.TextEdit();
@@ -74,8 +72,6 @@
             mAMHLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsMonHoc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vDSPMBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tRACNGHIEMDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsBoDe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenMH.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaMH.Properties)).BeginInit();
@@ -240,14 +236,11 @@
             // 
             // cmbCoSo
             // 
-            this.cmbCoSo.DataSource = this.vDSPMBindingSource;
-            this.cmbCoSo.DisplayMember = "TENCS";
             this.cmbCoSo.FormattingEnabled = true;
             this.cmbCoSo.Location = new System.Drawing.Point(547, 31);
             this.cmbCoSo.Name = "cmbCoSo";
             this.cmbCoSo.Size = new System.Drawing.Size(333, 28);
             this.cmbCoSo.TabIndex = 39;
-            this.cmbCoSo.ValueMember = "TENSERVER";
             this.cmbCoSo.SelectedIndexChanged += new System.EventHandler(this.cmbCoSo_SelectedIndexChanged);
             // 
             // bar4
@@ -453,8 +446,6 @@
             this.Load += new System.EventHandler(this.frmMonHoc_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsMonHoc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vDSPMBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tRACNGHIEMDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsBoDe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTenMH.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaMH.Properties)).EndInit();
@@ -478,8 +469,6 @@
         private DSTableAdapters.MONHOCTableAdapter mONHOCTableAdapter;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private DevExpress.XtraBars.Bar bar3;
-        private System.Windows.Forms.BindingSource tRACNGHIEMDataSetBindingSource;
-        private System.Windows.Forms.BindingSource vDSPMBindingSource;
         private DSTableAdapters.BODETableAdapter bODETableAdapter;
         private DevExpress.XtraEditors.TextEdit txtMaMH;
         private DevExpress.XtraEditors.TextEdit txtTenMH;

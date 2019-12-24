@@ -35,6 +35,7 @@ namespace CSDLPT
             this.dSMHTableAdapter.Connection.ConnectionString = Program.connstr;
             this.dSMHTableAdapter.Fill(this.dS.DSMH);
             // TODO: This line of code loads data into the 'dS.DSGV' table. You can move, or remove it, as needed.
+            this.dSGVTableAdapter.Connection.ConnectionString = Program.connstr;
             this.dSGVTableAdapter.Fill(this.dS.DSGV);
             // TODO: This line of code loads data into the 'dS.GIAOVIEN_DANGKY' table. You can move, or remove it, as needed.
             this.gIAOVIEN_DANGKYTableAdapter.Connection.ConnectionString = Program.connstr;
@@ -53,19 +54,6 @@ namespace CSDLPT
 
             cmbTrinhDo.SelectedIndex = 0;
             cmbLan.SelectedIndex = 0;
-
-            if (cmbHoTen.SelectedValue.ToString() != null)
-            {
-                txtMaGV.Text = cmbHoTen.SelectedValue.ToString();
-            }
-            if (cmbTenMH.SelectedValue.ToString() != null)
-            {
-                txtMaMH.Text = cmbTenMH.SelectedValue.ToString();
-            }
-            if (cmbTenLop.SelectedValue.ToString() != null)
-            {
-                txtMaLop.Text = cmbTenLop.SelectedValue.ToString();
-            }
 
             cmbCoSo.DataSource = Program.bds_dspm;
             cmbCoSo.DisplayMember = "TENCS";
@@ -134,11 +122,12 @@ namespace CSDLPT
                 cmbTenMH.SelectedIndex = 0;
                 txtMaMH.Text = cmbTenMH.SelectedValue.ToString();
             }
-            if (bdsLop.Count > 0)
+            if (bdsDSLop.Count > 0)
             {
                 cmbTenLop.SelectedIndex = 0;
                 txtMaLop.Text = cmbTenLop.SelectedValue.ToString();
             }
+
             cmbTrinhDo.SelectedIndex = 1;
             cmbLan.SelectedIndex = 1;
             cmbTrinhDo.SelectedIndex = 0;
@@ -159,48 +148,45 @@ namespace CSDLPT
             cmbTenLop.Enabled = true;
             cmbLan.Enabled = true;
 
+            cmbHoTen.Focus();
             status = "Them";
         }
 
-        private int getViTri(BindingSource bds, string text)
-        {
-            int a = 0;
-            for (int i = 0; i < bds.Count; i++)
-            {
-                if (bds == bdsDSGV)
-                {
-                    if (text.Equals(((DataRowView)bds[i])["MAGV"].ToString()))
-                    {
-                        a = i;
-                        break;
-                    }
-                }
-                else if (bds == bdsMH)
-                {
-                    if (text.Equals(((DataRowView)bds[i])["MAMH"].ToString()))
-                    {
-                        a = i;
-                        break;
-                    }
-                }
-                else if (bds == bdsLop)
-                {
-                    if (text.Equals(((DataRowView)bds[i])["MALOP"].ToString()))
-                    {
-                        a = i;
-                        break;
-                    }
-                }
-            }
-            return a;
-        }
+        //private int getViTri(BindingSource bds, string text)
+        //{
+        //    int a = 0;
+        //    for (int i = 0; i < bds.Count; i++)
+        //    {
+        //        if (bds == bdsDSGV)
+        //        {
+        //            if (text.Equals(((DataRowView)bds[i])["MAGV"].ToString()))
+        //            {
+        //                a = i;
+        //                break;
+        //            }
+        //        }
+        //        else if (bds == bdsMH)
+        //        {
+        //            if (text.Equals(((DataRowView)bds[i])["MAMH"].ToString()))
+        //            {
+        //                a = i;
+        //                break;
+        //            }
+        //        }
+        //        else if (bds == bdsDSLop)
+        //        {
+        //            if (text.Equals(((DataRowView)bds[i])["MALOP"].ToString()))
+        //            {
+        //                a = i;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return a;
+        //}
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            cmbHoTen.SelectedIndex = getViTri(bdsDSGV, txtMaGV.Text);
-            cmbTenMH.SelectedIndex = getViTri(bdsMH, txtMaMH.Text);
-            cmbTenLop.SelectedIndex = getViTri(bdsLop, txtMaLop.Text);
-
             vitri = bdsGiaoVienDK.Position;
             panelControl1.Enabled = true;
             btnThem.Enabled = false;
@@ -275,6 +261,21 @@ namespace CSDLPT
                 return;
             }
 
+            if(status == "Them")
+            {
+                string strLenh2 = "EXEC dbo.SP_KTGVDKTonTai '" + txtMaMH.Text + "', '" + txtMaLop.Text + "' , " + cmbLan.SelectedItem.ToString();
+                Program.myReader = Program.ExecSqlDataReader(strLenh2);
+                Program.myReader.Read();
+                int kq2 = int.Parse(Program.myReader[0].ToString());
+                Program.myReader.Close();
+                if (kq2 == 1)
+                {
+                    MessageBox.Show("Lớp này đã được đăng ký", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Program.conn.Close();
+                    return;
+                }
+            }
+
             try
             {
                 bdsGiaoVienDK.EndEdit(); //ket thuc qua trinh hieu chinh
@@ -283,21 +284,12 @@ namespace CSDLPT
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("unique") || ex.Message.Contains("PRIMARY"))
-                {
-                    MessageBox.Show("Lớp này đã được đăng ký", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Program.conn.Close();
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("Lỗi ghi đăng ký thi " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+                MessageBox.Show("Lỗi ghi đăng ký thi " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
             panelControl1.Enabled = false;
             btnGhi.Enabled = false;
-            btnPhucHoi.Enabled = false;
+            btnPhucHoi.Enabled = true;
             btnThem.Enabled = true;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
@@ -348,6 +340,12 @@ namespace CSDLPT
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsGiaoVienDK.CancelEdit(); //huy chinh sua tren hang
+
+            this.dSLOPTableAdapter.Fill(this.dS.DSLOP);
+            this.dSMHTableAdapter.Fill(this.dS.DSMH);
+            this.dSGVTableAdapter.Fill(this.dS.DSGV);
+            this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
+
             bdsGiaoVienDK.Position = vitri;
             gcGiaoVienDK.Enabled = true;
             panelControl1.Enabled = false;

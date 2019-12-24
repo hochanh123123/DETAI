@@ -402,14 +402,11 @@
             // 
             // cmbCoSo
             // 
-            this.cmbCoSo.DataSource = this.vDSPMBindingSource;
-            this.cmbCoSo.DisplayMember = "TENCS";
             this.cmbCoSo.FormattingEnabled = true;
             this.cmbCoSo.Location = new System.Drawing.Point(437, 27);
             this.cmbCoSo.Name = "cmbCoSo";
             this.cmbCoSo.Size = new System.Drawing.Size(333, 24);
             this.cmbCoSo.TabIndex = 41;
-            this.cmbCoSo.ValueMember = "TENSERVER";
             this.cmbCoSo.SelectedIndexChanged += new System.EventHandler(this.cmbCoSo_SelectedIndexChanged);
             // 
             // vDSPMBindingSource
@@ -621,7 +618,7 @@
             // cmbTenKhoa
             // 
             this.cmbTenKhoa.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdsDSKhoa, "TENKH", true));
-            this.cmbTenKhoa.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.bdsDSKhoa, "MAKH", true));
+            this.cmbTenKhoa.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.bdsLop, "MAKH", true));
             this.cmbTenKhoa.DataSource = this.bdsDSKhoa;
             this.cmbTenKhoa.DisplayMember = "TENKH";
             this.cmbTenKhoa.FormattingEnabled = true;
@@ -738,47 +735,47 @@
             this.btnPhucHoiSV,
             this.btnRefreshSV});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 176);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 148);
             // 
             // btnThemSV
             // 
             this.btnThemSV.Name = "btnThemSV";
-            this.btnThemSV.Size = new System.Drawing.Size(210, 24);
+            this.btnThemSV.Size = new System.Drawing.Size(134, 24);
             this.btnThemSV.Text = "Thêm";
             this.btnThemSV.Click += new System.EventHandler(this.btnThemSV_Click);
             // 
             // btnSuaSV
             // 
             this.btnSuaSV.Name = "btnSuaSV";
-            this.btnSuaSV.Size = new System.Drawing.Size(210, 24);
+            this.btnSuaSV.Size = new System.Drawing.Size(134, 24);
             this.btnSuaSV.Text = "Sửa";
             this.btnSuaSV.Click += new System.EventHandler(this.btnSuaSV_Click);
             // 
             // btnGhiSV
             // 
             this.btnGhiSV.Name = "btnGhiSV";
-            this.btnGhiSV.Size = new System.Drawing.Size(210, 24);
+            this.btnGhiSV.Size = new System.Drawing.Size(134, 24);
             this.btnGhiSV.Text = "Ghi";
             this.btnGhiSV.Click += new System.EventHandler(this.btnGhiSV_Click);
             // 
             // btnXoaSV
             // 
             this.btnXoaSV.Name = "btnXoaSV";
-            this.btnXoaSV.Size = new System.Drawing.Size(210, 24);
+            this.btnXoaSV.Size = new System.Drawing.Size(134, 24);
             this.btnXoaSV.Text = "Xóa";
             this.btnXoaSV.Click += new System.EventHandler(this.btnXoaSV_Click);
             // 
             // btnPhucHoiSV
             // 
             this.btnPhucHoiSV.Name = "btnPhucHoiSV";
-            this.btnPhucHoiSV.Size = new System.Drawing.Size(210, 24);
+            this.btnPhucHoiSV.Size = new System.Drawing.Size(134, 24);
             this.btnPhucHoiSV.Text = "Phục hồi";
             this.btnPhucHoiSV.Click += new System.EventHandler(this.btnPhucHoiSV_Click);
             // 
             // btnRefreshSV
             // 
             this.btnRefreshSV.Name = "btnRefreshSV";
-            this.btnRefreshSV.Size = new System.Drawing.Size(210, 24);
+            this.btnRefreshSV.Size = new System.Drawing.Size(134, 24);
             this.btnRefreshSV.Text = "Refresh";
             this.btnRefreshSV.Click += new System.EventHandler(this.btnRefreshSV_Click);
             // 
