@@ -285,11 +285,12 @@
             // 
             // btnDe
             // 
-            this.btnDe.Caption = "Đề";
+            this.btnDe.Caption = "Bộ đề";
             this.btnDe.Id = 22;
             this.btnDe.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDe.ImageOptions.Image")));
             this.btnDe.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnDe.ImageOptions.LargeImage")));
             this.btnDe.Name = "btnDe";
+            this.btnDe.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDe_ItemClick);
             // 
             // btnThiThu
             // 
@@ -402,6 +403,7 @@
             this.btnXemDiem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXemDiem.ImageOptions.Image")));
             this.btnXemDiem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXemDiem.ImageOptions.LargeImage")));
             this.btnXemDiem.Name = "btnXemDiem";
+            this.btnXemDiem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnXemDiem_ItemClick);
             // 
             // barButtonItem13
             // 
@@ -444,8 +446,8 @@
             // 
             this.btnXemKetQua.Caption = "Xem Kết Quả";
             this.btnXemKetQua.Id = 44;
-            this.btnXemKetQua.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.btnXemKetQua.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.btnXemKetQua.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXemKetQua.ImageOptions.Image")));
+            this.btnXemKetQua.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnXemKetQua.ImageOptions.LargeImage")));
             this.btnXemKetQua.Name = "btnXemKetQua";
             this.btnXemKetQua.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnXemKetQua_ItemClick);
             // 

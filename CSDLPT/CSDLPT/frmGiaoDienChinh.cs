@@ -153,5 +153,29 @@ namespace CSDLPT
                 f.Show();
             }
         }
+
+        private void btnDe_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frmBoDe));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmBoDe f = new frmBoDe();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void btnXemDiem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frmXemBangDiem));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmXemBangDiem f = new frmXemBangDiem();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
     }
 }

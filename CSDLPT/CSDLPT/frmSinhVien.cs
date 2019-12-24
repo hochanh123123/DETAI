@@ -436,8 +436,6 @@ namespace CSDLPT
 
         private void btnXoaSV_Click(object sender, EventArgs e)
         {
-
-
             if (txtMaSV.Text.Trim() == "")
             {
                 MessageBox.Show("Vui lòng chọn SV cần xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
