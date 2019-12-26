@@ -158,13 +158,13 @@ namespace CSDLPT
                 return;
             }
 
-            string strLenh1 = "EXEC SP_KiemTraTenLopTonTai '" + txtTenLop.Text + "'";
+            string strLenh1 = "EXEC SP_KiemTraTenLopTonTai N'" + txtTenLop.Text + "'";
             Program.myReader = Program.ExecSqlDataReader(strLenh1);
             Program.myReader.Read();
             int kq1 = Int32.Parse(Program.myReader.GetInt32(0).ToString());
             if (kq1 == 1)
             {
-                MessageBox.Show("Tên môn học không được trùng. Mời nhập tên môn học khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Tên lớp không được trùng. Mời nhập tên lớp khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Program.myReader.Close();
                 txtTenLop.Focus();
                 return;

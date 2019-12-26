@@ -150,7 +150,7 @@ namespace CSDLPT
                 return;
             }
 
-            string strLenh1 = "EXEC SP_TimKiemTenMH '" + txtTenMH.Text + "'";
+            string strLenh1 = "EXEC SP_TimKiemTenMH N'" + txtTenMH.Text + "'";
             Program.myReader = Program.ExecSqlDataReader(strLenh1);
             Program.myReader.Read();
             int kq1 = Int32.Parse(Program.myReader.GetInt32(0).ToString());

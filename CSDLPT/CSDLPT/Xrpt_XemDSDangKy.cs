@@ -12,7 +12,7 @@ namespace CSDLPT
         {
             InitializeComponent();
             ds1.EnforceConstraints = false;
-            this.sP_XemDSDangKyTableAdapter.Fill(ds1.SP_XemDSDangKy, DateTime.Parse( tuNgay), DateTime.Parse(denNgay));
+            this.sP_XemDSDangKyTableAdapter.Fill(ds1.SP_XemDSDangKy, DateTime.Parse(tuNgay), DateTime.Parse(denNgay));
         }
 
     }

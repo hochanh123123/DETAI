@@ -24,7 +24,6 @@ namespace CSDLPT
             this.Validate();
             this.bdsBoDe.EndEdit();
             this.tableAdapterManager.UpdateAll(this.dS);
-
         }
 
         private void frmDe_Load(object sender, EventArgs e)
@@ -90,6 +89,13 @@ namespace CSDLPT
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            this.bdsBoDe.AddNew(); //Them mot muc moi vao danh sach
+
+            cmbTrinhDo.SelectedIndex = 1;
+            cmbDapAn.SelectedIndex = 1;
+            cmbTrinhDo.SelectedIndex = 0;
+            cmbDapAn.SelectedIndex = 0;
+
             vitri = bdsBoDe.Position;
             panelControl1.Enabled = true;
 
@@ -103,7 +109,7 @@ namespace CSDLPT
             btnGhi.Enabled = true;
             txtMaMH.Enabled = true;
 
-            this.bdsBoDe.AddNew(); //Them mot muc moi vao danh sach
+           
             txtMaMH.Focus(); //dieu khien con tro toi o textbox
             status = "Them";
         }
@@ -126,26 +132,29 @@ namespace CSDLPT
 
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //if (status.Equals("Them"))
-            //{
+            if (status.Equals("Them"))
+            {
+                if (txtCauHoi.Text.Trim() == "")
+                {
+                    MessageBox.Show("Nội dung không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtCauHoi.Focus();
+                    return;
+                }
 
-
-
-            //string strLenh = "EXEC SP_TimKiemMH '" + txtMaMH.Text + "'";
-            //Program.myReader = Program.ExecSqlDataReader(strLenh);
-            //Program.myReader.Read();
-            //int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
-            //if (kq == 1)
-            //{
-            //    MessageBox.Show("Mã Môn học đã tồn tại. Mời nhập mã môn học khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //    Program.myReader.Close();
-            //    Program.conn.Close();
-            //    txtMaMH.Focus();
-            //    return;
-            //}
-            //Program.myReader.Close();
-            //}
-            
+                string strLenh = "EXEC SP_TimKiemMaBoDe '" + txtCauHoi.Text + "'";
+                Program.myReader = Program.ExecSqlDataReader(strLenh);
+                Program.myReader.Read();
+                int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+                if (kq == 1)
+                {
+                    MessageBox.Show("Câu hỏi đã tồn tại. Mời nhập mã câu hỏi khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Program.myReader.Close();
+                    Program.conn.Close();
+                    txtCauHoi.Focus();
+                    return;
+                }
+                Program.myReader.Close();
+            }
 
             if (txtNoiDung.Text.Trim() == "")
             {
@@ -178,20 +187,20 @@ namespace CSDLPT
                 txtD.Focus();
                 return;
             }
-            //noidung a bc d
-            //string strLenh1 = "EXEC SP_TimKiemTenMH '" + txtTenMH.Text + "'";
-            //Program.myReader = Program.ExecSqlDataReader(strLenh1);
-            //Program.myReader.Read();
-            //int kq1 = Int32.Parse(Program.myReader.GetInt32(0).ToString());
-            //if (kq1 == 1)
-            //{
-            //    MessageBox.Show("Tên Môn học không được trùng. Mời nhập tên môn học khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //    Program.myReader.Close();
-            //    Program.conn.Close();
-            //    txtTenMH.Focus();
-            //    return;
-            //}
-            //Program.myReader.Close();
+
+            string strLenh1 = "EXEC SP_KTBoDeNoiDung N'" + txtNoiDung.Text + "', N'" + txtA.Text +"', N'" + txtB.Text + "', N'" + txtC.Text  + "', N'" + txtD.Text  + "'";
+            Program.myReader = Program.ExecSqlDataReader(strLenh1);
+            Program.myReader.Read();
+            int kq1 = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+            if (kq1 == 1)
+            {
+                MessageBox.Show("Nội dung và đáp án của câu hỏi bị trùng. Mời nhập lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Program.myReader.Close();
+                Program.conn.Close();
+                txtNoiDung.Focus();
+                return;
+            }
+            Program.myReader.Close();
 
             try
             {
@@ -327,12 +336,25 @@ namespace CSDLPT
 
         private void cmbTenMH_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //txtMaMH.Text = cmbTenMH.SelectedValue.ToString();
+            try
+            {
+                txtMaMH.Text = cmbTenMH.SelectedValue.ToString();
+            }
+            catch (Exception ex) { };
         }
 
         private void cmbTenGV_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //txtMaGV.Text = cmbTenGV.SelectedValue.ToString();
+            try
+            {
+                txtMaGV.Text = cmbTenGV.SelectedValue.ToString();
+            }
+            catch (Exception ex) { };
+        }
+
+        private void panelControl1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

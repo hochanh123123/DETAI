@@ -152,6 +152,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Xrpt_XemBangDiem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Xrpt_XemBangDiem.Designer.cs">
+      <DependentUpon>Xrpt_XemBangDiem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Xrpt_XemDSDangKy.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -204,6 +210,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xrpt_XemBangDiem.resx">
+      <DependentUpon>Xrpt_XemBangDiem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Xrpt_XemDSDangKy.resx">
       <DependentUpon>Xrpt_XemDSDangKy.cs</DependentUpon>

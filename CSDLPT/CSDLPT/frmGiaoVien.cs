@@ -26,6 +26,10 @@ namespace CSDLPT
             this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
             // TODO: This line of code loads data into the 'dS.BODE' table. You can move, or remove it, as needed.
             this.bODETableAdapter.Fill(this.dS.BODE);
+            // TODO: This line of code loads data into the 'dS.GIAOVIEN_DANGKY' table. You can move, or remove it, as needed.
+            this.gIAOVIEN_DANGKYTableAdapter.Fill(this.dS.GIAOVIEN_DANGKY);
+            // TODO: This line of code loads data into the 'dS.BODE' table. You can move, or remove it, as needed.
+            this.bODETableAdapter.Fill(this.dS.BODE);
             dS.EnforceConstraints = false; //khong kt khao ngoai
 
             this.kHOATableAdapter.Connection.ConnectionString = Program.connstr; 
@@ -70,6 +74,9 @@ namespace CSDLPT
                 btnGhi.Enabled = false;
                 cmbCoSo.Enabled = false;
             }
+
+            panelControlKhoa.Enabled = false;
+            panelControlGiaoVien.Enabled = false;
         }
 
         private void kHOABindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -120,6 +127,7 @@ namespace CSDLPT
             this.bdsKhoa.AddNew(); //Them mot muc moi vao danh sach
             vitri = bdsKhoa.Position;
             panelControlKhoa.Enabled = true;
+            panelControlGiaoVien.Enabled = false;
 
             gcKhoa.Enabled = false;
             btnThem.Enabled = false;
@@ -148,6 +156,8 @@ namespace CSDLPT
             vitri = bdsKhoa.Position;
             status = "Sua";
             panelControlKhoa.Enabled = true;
+            panelControlGiaoVien.Enabled = false;
+
             btnThem.Enabled = false;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
@@ -176,18 +186,18 @@ namespace CSDLPT
                     return;
                 }
 
-                //string strLenh = "EXEC SP_KiemTraLopTonTai '" + txtMaKH.Text + "'";
-                //Program.myReader = Program.ExecSqlDataReader(strLenh);
-                //Program.myReader.Read();
-                //int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
-                //if (kq == 1)
-                //{
-                //    MessageBox.Show("Mã Lớp đã tồn tại. Mời nhập mã lớp khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //    Program.myReader.Close();
-                //    txtMaLop.Focus();
-                //    return;
-                //}
-                //Program.myReader.Close();
+                string strLenh = "EXEC SP_KiemTraKhoaTonTai '" + txtMaKH.Text + "'";
+                Program.myReader = Program.ExecSqlDataReader(strLenh);
+                Program.myReader.Read();
+                int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+                if (kq == 1)
+                {
+                    MessageBox.Show("Mã khoa đã tồn tại. Mời nhập mã khoa khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Program.myReader.Close();
+                    txtMaKH.Focus();
+                    return;
+                }
+                Program.myReader.Close();
             }
 
             if (txtTenKH.Text.Trim() == "")
@@ -203,18 +213,18 @@ namespace CSDLPT
                 return;
             }
 
-            //string strLenh1 = "EXEC SP_KiemTraTenLopTonTai '" + txtT.Text + "'";
-            //Program.myReader = Program.ExecSqlDataReader(strLenh1);
-            //Program.myReader.Read();
-            //int kq1 = Int32.Parse(Program.myReader.GetInt32(0).ToString());
-            //if (kq1 == 1)
-            //{
-            //    MessageBox.Show("Tên môn học không được trùng. Mời nhập tên môn học khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //    Program.myReader.Close();
-            //    txtTenLop.Focus();
-            //    return;
-            //}
-            //Program.myReader.Close();
+            string strLenh1 = "EXEC SP_KiemTraTenKhoaTonTai N'" + txtTenKH.Text + "'";
+            Program.myReader = Program.ExecSqlDataReader(strLenh1);
+            Program.myReader.Read();
+            int kq1 = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+            if (kq1 == 1)
+            {
+                MessageBox.Show("Tên Khoa không được trùng. Mời nhập tên khoa khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Program.myReader.Close();
+                txtTenKH.Focus();
+                return;
+            }
+            Program.myReader.Close();
 
             try
             {
@@ -228,6 +238,8 @@ namespace CSDLPT
             }
 
             panelControlKhoa.Enabled = false;
+            panelControlGiaoVien.Enabled = false;
+
             btnGhi.Enabled = false;
             btnPhucHoi.Enabled = false;
             btnThem.Enabled = true;
@@ -274,6 +286,7 @@ namespace CSDLPT
 
             gcKhoa.Enabled = true;
             panelControlKhoa.Enabled = false;
+            panelControlGiaoVien.Enabled = false;
             btnGhi.Enabled = false;
             btnPhucHoi.Enabled = true;
             btnThem.Enabled = true;
@@ -289,6 +302,7 @@ namespace CSDLPT
             bdsKhoa.Position = vitri;
             gcKhoa.Enabled = true;
             panelControlKhoa.Enabled = false;
+            panelControlGiaoVien.Enabled = false;
             btnGhi.Enabled = false;
             btnPhucHoi.Enabled = false;
             btnThem.Enabled = true;
@@ -341,6 +355,7 @@ namespace CSDLPT
         private void btnSuaGV_Click(object sender, EventArgs e)
         {
             status1 = "Sua";
+            panelControlKhoa.Enabled = false;
             panelControlGiaoVien.Enabled = true;
             gcKhoa.Enabled = false;
             btnThem.Enabled = false;
@@ -377,18 +392,18 @@ namespace CSDLPT
                     return;
                 }
 
-                //string strLenh = "EXEC SP_KiemTraSVTonTai '" + txtMaGV.Text + "'";
-                //Program.myReader = Program.ExecSqlDataReader(strLenh);
-                //Program.myReader.Read();
-                //int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
-                //if (kq == 1)
-                //{
-                //    MessageBox.Show("Mã SV đã tồn tại. Mời nhập mã SV khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //    Program.myReader.Close();
-                //    txtMaLop.Focus();
-                //    return;
-                //}
-                //Program.myReader.Close();
+                string strLenh = "EXEC SP_KiemTraGVTonTai '" + txtMaGV.Text + "'";
+                Program.myReader = Program.ExecSqlDataReader(strLenh);
+                Program.myReader.Read();
+                int kq = Int32.Parse(Program.myReader.GetInt32(0).ToString());
+                if (kq == 1)
+                {
+                    MessageBox.Show("Mã GV đã tồn tại. Mời nhập mã GV khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Program.myReader.Close();
+                    txtMaGV.Focus();
+                    return;
+                }
+                Program.myReader.Close();
             }
 
             if (txtHo.Text.Trim() == "")
@@ -445,13 +460,14 @@ namespace CSDLPT
             btnThoat.Enabled = true;
             btnGhi.Enabled = false;
 
+            panelControlKhoa.Enabled = false;
             panelControlGiaoVien.Enabled = false;
             btnThemGV.Enabled = true;
             btnSuaGV.Enabled = true;
             btnGhiGV.Enabled = false;
             btnXoaGV.Enabled = true;
             btnRefreshGV.Enabled = true;
-            btnPhucHoiGV.Enabled = true;
+            btnPhucHoiGV.Enabled = false;
         }
 
         private void btnXoaGV_Click(object sender, EventArgs e)
@@ -502,6 +518,8 @@ namespace CSDLPT
             btnThoat.Enabled = true;
             btnGhi.Enabled = false;
 
+            panelControlKhoa.Enabled = false;
+            panelControlGiaoVien.Enabled = false;
             btnThemGV.Enabled = true;
             btnSuaGV.Enabled = true;
             btnGhiGV.Enabled = false;
@@ -523,6 +541,8 @@ namespace CSDLPT
             btnThoat.Enabled = true;
             btnGhi.Enabled = false;
 
+            panelControlKhoa.Enabled = false;
+            panelControlGiaoVien.Enabled = false;
             btnThemGV.Enabled = true;
             btnSuaGV.Enabled = true;
             btnGhiGV.Enabled = false;
@@ -536,6 +556,8 @@ namespace CSDLPT
             dS.EnforceConstraints = false; //cac quy tac khong duoc thi hanh
             this.gIAOVIENTableAdapter.Fill(this.dS.GIAOVIEN);
 
+            panelControlKhoa.Enabled = false;
+            panelControlGiaoVien.Enabled = false;
             btnThemGV.Enabled = true;
             btnSuaGV.Enabled = true;
             btnGhiGV.Enabled = false;

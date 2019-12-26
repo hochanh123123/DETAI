@@ -672,6 +672,7 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6});
+            this.sINHVIENDataGridView.ContextMenuStrip = this.contextMenuStrip1;
             this.sINHVIENDataGridView.DataSource = this.bdsSinhVien;
             this.sINHVIENDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sINHVIENDataGridView.Location = new System.Drawing.Point(2, 2);
@@ -806,7 +807,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1546, 611);
-            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.gcLop);
